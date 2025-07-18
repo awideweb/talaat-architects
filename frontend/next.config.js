@@ -15,10 +15,8 @@ const nextConfig = {
     formats: ['image/webp', 'image/avif'],
   },
   trailingSlash: false,
-  experimental: {
-    // Ensure TypeScript path mapping works correctly
-    typedRoutes: true,
-  },
+  // Disable experimental features for more stable Vercel builds
+  experimental: {},
   async rewrites() {
     // Only apply rewrites in development
     if (process.env.NODE_ENV === 'development') {
