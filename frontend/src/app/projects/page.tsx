@@ -67,7 +67,7 @@ export default function ProjectsPage() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-lg text-gray-600"
+          className="text-lg text-gray-400"
         >
           Loading projects...
         </motion.div>
@@ -93,10 +93,10 @@ export default function ProjectsPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h1 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
+            <h1 className="text-3xl font-light text-gray-500 uppercase tracking-wide mb-6">
               All Projects
             </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
               Explore our complete portfolio of architectural projects, from residential homes to innovative unbuilt designs.
             </p>
           </motion.div>

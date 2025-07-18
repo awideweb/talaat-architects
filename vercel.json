@@ -1,23 +1,16 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/frontend/$1"
-    }
-  ],
+  "buildCommand": "npm run build:content && cd frontend && npm run build",
+  "outputDirectory": "frontend/.next",
+  "installCommand": "npm install",
   "functions": {
     "frontend/src/app/api/projects/route.ts": {
+      "maxDuration": 30
+    },
+    "frontend/src/app/api/projects/[slug]/route.ts": {
+      "maxDuration": 30
+    },
+    "frontend/src/app/api/projects/category/[category]/route.ts": {
       "maxDuration": 30
     }
   }

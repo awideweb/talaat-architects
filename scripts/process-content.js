@@ -93,6 +93,12 @@ class ContentProcessor {
     // Process images
     const images = await this.processProjectImages(projectPath, projectOutputDir);
     
+    // Skip projects with no images
+    if (images.length === 0) {
+      console.log(`⚠️  Skipping ${projectName} - no images found`);
+      return;
+    }
+    
     // Create project data
     const project = {
       id: slug,
@@ -180,10 +186,14 @@ class ContentProcessor {
 
   formatProjectName(name) {
     return name
-      .split('_')
+      .replace(/^\d+[_-]?/, '') // Remove leading numbers with optional separator
+      .replace(/[_-]/g, ' ') // Replace underscores and hyphens with spaces
+      .replace(/[^a-zA-Z0-9\s]/g, '') // Remove all special characters except letters, numbers, and spaces
+      .replace(/\s+/g, ' ') // Replace multiple spaces with single space
+      .split(' ')
       .map(part => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
       .join(' ')
-      .replace(/^\d+_?\s*/, ''); // Remove leading numbers and underscores
+      .trim();
   }
 
   sanitizeFileName(fileName) {

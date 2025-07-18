@@ -73,7 +73,7 @@ export default function Home() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-lg text-gray-600"
+          className="text-lg text-gray-400"
         >
           Loading...
         </motion.div>
@@ -99,10 +99,10 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-2xl font-light text-gray-400 mb-6">
+            <h2 className="text-3xl font-light text-gray-500 uppercase tracking-wide mb-6">
               RECENT PROJECTS
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
               Highly crafted built environments in intimate conversation with their surroundings.
             </p>
           </motion.div>
