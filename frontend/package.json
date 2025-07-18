@@ -9,13 +9,18 @@
     "lint": "next lint",
     "build:production": "npm run lint && next build",
     "start:production": "next start",
-    "export": "next export"
+    "export": "next export",
+    "build:content": "node ../scripts/build-content.js",
+    "build:full": "npm run build:content && npm run build"
   },
   "dependencies": {
     "framer-motion": "^12.23.6",
+    "fs-extra": "^11.3.0",
+    "gray-matter": "^4.0.3",
     "next": "15.4.1",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "sharp": "^0.34.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
