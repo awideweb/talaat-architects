@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Hero, ProjectGrid, Navigation, LandingPage } from '../components';
+import { Hero, ProjectGrid, LandingPage } from '../components';
 
 interface Project {
   id: string;
@@ -80,8 +80,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navigation />
-      
       <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -1,12 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Navigation } from '../../components';
+import { UniversalNavigation } from '../../components';
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white">
-      <Navigation />
+      <UniversalNavigation />
       
       <motion.main
         initial={{ opacity: 0 }}
