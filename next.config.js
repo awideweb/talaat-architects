@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -21,6 +23,15 @@ const nextConfig = {
   experimental: {},
   // Configure webpack for better module resolution
   webpack: (config) => {
+    // Add explicit alias resolution
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname, 'src'),
+      '@/components': path.resolve(__dirname, 'src/components'),
+      '@/config': path.resolve(__dirname, 'src/config'),
+      '@/data': path.resolve(__dirname, 'src/data'),
+    };
+    
     config.resolve.fallback = {
       ...config.resolve.fallback,
       fs: false,

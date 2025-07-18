@@ -3,10 +3,7 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Hero from '@/components/Hero';
-import ProjectGrid from '@/components/ProjectGrid';
-import Navigation from '@/components/Navigation';
-import LandingPage from '@/components/LandingPage';
+import { Hero, ProjectGrid, Navigation, LandingPage } from '../components';
 
 interface Project {
   id: string;

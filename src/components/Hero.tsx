@@ -3,8 +3,8 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
-import { heroImages, heroConfig } from '@/config/hero-images';
-import { timelineContent, awards } from '@/data/hero-content';
+import { heroImages, heroConfig } from '../config/hero-images';
+import { timelineContent, awards } from '../data/hero-content';
 
 export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);

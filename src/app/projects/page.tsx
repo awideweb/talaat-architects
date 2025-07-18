@@ -2,8 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useState, useCallback } from 'react';
-import Navigation from '@/components/Navigation';
-import ProjectGrid from '@/components/ProjectGrid';
+import { Navigation, ProjectGrid } from '../../components';
 
 interface Project {
   id: string;
