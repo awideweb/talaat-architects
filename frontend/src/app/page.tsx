@@ -99,8 +99,8 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
-              Selected Projects
+            <h2 className="text-4xl md:text-2xl font-light text-gray-400 mb-6">
+              RECENT PROJECTS
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Highly crafted built environments in intimate conversation with their surroundings.

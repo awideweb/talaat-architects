@@ -77,15 +77,21 @@ The content processor (`scripts/process-content.js`) automatically:
 
 ### Project Structure Expected
 ```
-../Talaat Studio_Website/CONTENT/
-├── 3_RESIDENTIAL/           # Residential projects
+content/
+├── residential/             # Residential projects
 │   ├── 1wilson-lane/
 │   ├── 2springvale-road/
-│   └── ...
-└── 6_UNBUILT (ARCHIVE)/     # Unbuilt projects
+│   ├── 3watermill-lane/
+│   ├── 4wapakoneta-road/
+│   ├── 5wolf-run/
+│   ├── 6kiawah/
+│   └── 7riverbend/
+└── unbuilt/                 # Unbuilt projects
     ├── community-for-the-homeless/
     ├── iceland-cave-tower/
-    └── ...
+    ├── kiwi-meditation-cabin/
+    ├── metsa-library/
+    └── micro-home/
 ```
 
 ## Key Configuration Files
@@ -96,7 +102,7 @@ The content processor (`scripts/process-content.js`) automatically:
 
 ## Development Workflow
 
-1. **Adding New Projects**: Place images in appropriate source directories, run `npm run content:process`
+1. **Adding New Projects**: Place images in `content/residential/` or `content/unbuilt/` directories, run `npm run content:process`
 2. **Hero Images**: Update `frontend/src/config/hero-images.ts` to modify slideshow
 3. **Styling**: Use Tailwind CSS with custom configurations in `tailwind.config.js`
 4. **API Development**: Backend routes in `backend/index.js`, frontend API routes in `frontend/src/app/api/`

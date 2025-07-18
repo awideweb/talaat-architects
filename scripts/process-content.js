@@ -5,7 +5,7 @@ const sharp = require('sharp');
 
 class ContentProcessor {
   constructor() {
-    this.sourceDir = path.join(__dirname, '../../Talaat Studio_Website/CONTENT');
+    this.sourceDir = path.join(__dirname, '../content');
     this.outputDir = path.join(__dirname, '../frontend/public/projects');
     this.dataDir = path.join(__dirname, '../frontend/src/data');
     this.projects = [];
@@ -31,7 +31,7 @@ class ContentProcessor {
   }
 
   async processResidentialProjects() {
-    const residentialDir = path.join(this.sourceDir, '3_RESIDENTIAL');
+    const residentialDir = path.join(this.sourceDir, 'residential');
     
     if (!await fs.pathExists(residentialDir)) {
       console.log('⚠️  Residential directory not found');
@@ -51,7 +51,7 @@ class ContentProcessor {
   }
 
   async processUnbuiltProjects() {
-    const unbuiltDir = path.join(this.sourceDir, '6_UNBUILT (ARCHIVE)');
+    const unbuiltDir = path.join(this.sourceDir, 'unbuilt');
     
     if (!await fs.pathExists(unbuiltDir)) {
       console.log('⚠️  Unbuilt directory not found');
@@ -121,8 +121,8 @@ class ContentProcessor {
         const stats = await fs.stat(filePath);
         
         if (stats.isFile() && imageExtensions.includes(path.extname(file).toLowerCase())) {
-          // Skip archive directories
-          if (file.toLowerCase().includes('archive')) continue;
+          // Skip archive directories and thumbnail files
+          if (file.toLowerCase().includes('archive') || file.toLowerCase().startsWith('thumb_')) continue;
           
           const outputFileName = this.sanitizeFileName(file);
           const outputPath = path.join(outputDir, outputFileName);

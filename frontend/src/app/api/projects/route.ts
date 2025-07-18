@@ -4,35 +4,24 @@ import path from 'path';
 
 export async function GET() {
   try {
-    // Try multiple possible paths for the projects.json file
-    const possiblePaths = [
-      path.join(process.cwd(), 'src/data/projects.json'),
-      path.join(process.cwd(), 'frontend/src/data/projects.json'),
-      path.join(process.cwd(), '../frontend/src/data/projects.json'),
-      path.join(__dirname, '../../data/projects.json'),
-    ];
+    // When running in Next.js, process.cwd() points to the frontend directory
+    const projectsPath = path.join(process.cwd(), 'src/data/projects.json');
     
-    let projectsData: string | undefined;
-    let projectsPath: string | undefined;
+    console.log('Looking for projects.json at:', projectsPath);
+    console.log('Current working directory:', process.cwd());
     
-    // Try each path until we find the file
-    for (const tryPath of possiblePaths) {
-      try {
-        await fs.access(tryPath);
-        projectsData = await fs.readFile(tryPath, 'utf8');
-        projectsPath = tryPath;
-        break;
-      } catch {
-        continue;
-      }
-    }
-    
-    if (!projectsData) {
-      console.error('Projects data not found at any of these paths:', possiblePaths);
+    // Check if file exists
+    try {
+      await fs.access(projectsPath);
+    } catch {
+      console.error('Projects data not found at:', projectsPath);
       return NextResponse.json({ error: 'Projects data not found' }, { status: 404 });
     }
     
+    // Read the file
+    const projectsData = await fs.readFile(projectsPath, 'utf8');
     const projects = JSON.parse(projectsData);
+    
     console.log(`Successfully loaded ${projects.length} projects from ${projectsPath}`);
     
     return NextResponse.json(projects);
