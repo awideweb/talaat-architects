@@ -1,5 +1,3 @@
-const path = require('path');
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -17,15 +15,15 @@ const nextConfig = {
     formats: ['image/webp', 'image/avif'],
   },
   trailingSlash: false,
+  // Ensure proper transpilation
+  transpilePackages: [],
   // Disable experimental features for more stable Vercel builds
   experimental: {},
+  // Configure webpack for better module resolution
   webpack: (config) => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@': path.resolve(__dirname, 'src'),
-      '@/components': path.resolve(__dirname, 'src/components'),
-      '@/config': path.resolve(__dirname, 'src/config'),
-      '@/data': path.resolve(__dirname, 'src/data'),
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
     };
     return config;
   },

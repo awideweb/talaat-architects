@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "npm run build:content && next build",
     "start": "next start",
     "lint": "next lint",
-    "build:content": "node scripts/build-content.js",
+    "build:content": "node scripts/process-content.js",
     "build:full": "npm run build:content && npm run build",
-    "build:production": "npm run lint && npm run build:full",
+    "build:production": "npm run lint && npm run build",
     "start:production": "next start",
     "content:process": "node scripts/process-content.js",
     "deploy:vercel": "npm run build:production && vercel --prod"
@@ -24,6 +24,7 @@
   "author": "TALAAT STUDIO",
   "license": "ISC",
   "dependencies": {
+    "@tailwindcss/postcss": "^4.0.0-alpha.35",
     "autoprefixer": "^10.4.21",
     "framer-motion": "^12.23.6",
     "fs-extra": "^11.3.0",
@@ -34,7 +35,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "sharp": "^0.34.3",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^4.0.0-alpha.35"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
