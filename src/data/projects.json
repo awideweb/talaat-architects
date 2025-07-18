@@ -1,0 +1,535 @@
+[
+  {
+    "id": "1wilson-lane",
+    "title": "Wilson Lane",
+    "description": "",
+    "category": "residential",
+    "year": 2025,
+    "location": "",
+    "images": [
+      {
+        "src": "/projects/1wilson-lane/1.jpg",
+        "thumbnail": "/projects/1wilson-lane/thumb_1.jpg",
+        "alt": "1wilson-lane - 1"
+      },
+      {
+        "src": "/projects/1wilson-lane/2.jpg",
+        "thumbnail": "/projects/1wilson-lane/thumb_2.jpg",
+        "alt": "1wilson-lane - 2"
+      },
+      {
+        "src": "/projects/1wilson-lane/3.jpg",
+        "thumbnail": "/projects/1wilson-lane/thumb_3.jpg",
+        "alt": "1wilson-lane - 3"
+      },
+      {
+        "src": "/projects/1wilson-lane/4.jpg",
+        "thumbnail": "/projects/1wilson-lane/thumb_4.jpg",
+        "alt": "1wilson-lane - 4"
+      },
+      {
+        "src": "/projects/1wilson-lane/5.jpg",
+        "thumbnail": "/projects/1wilson-lane/thumb_5.jpg",
+        "alt": "1wilson-lane - 5"
+      },
+      {
+        "src": "/projects/1wilson-lane/DSC_0356-2_4_.jpg",
+        "thumbnail": "/projects/1wilson-lane/thumb_DSC_0356-2_4_.jpg",
+        "alt": "1wilson-lane - DSC_0356-2_4_"
+      },
+      {
+        "src": "/projects/1wilson-lane/DSC_0376-2_4_.jpg",
+        "thumbnail": "/projects/1wilson-lane/thumb_DSC_0376-2_4_.jpg",
+        "alt": "1wilson-lane - DSC_0376-2_4_"
+      },
+      {
+        "src": "/projects/1wilson-lane/DSC_0422_4_.jpg",
+        "thumbnail": "/projects/1wilson-lane/thumb_DSC_0422_4_.jpg",
+        "alt": "1wilson-lane - DSC_0422_4_"
+      },
+      {
+        "src": "/projects/1wilson-lane/DSC_0431_4_.jpg",
+        "thumbnail": "/projects/1wilson-lane/thumb_DSC_0431_4_.jpg",
+        "alt": "1wilson-lane - DSC_0431_4_"
+      },
+      {
+        "src": "/projects/1wilson-lane/DSC_0465_4_.jpg",
+        "thumbnail": "/projects/1wilson-lane/thumb_DSC_0465_4_.jpg",
+        "alt": "1wilson-lane - DSC_0465_4_"
+      },
+      {
+        "src": "/projects/1wilson-lane/IMG_1341.jpg",
+        "thumbnail": "/projects/1wilson-lane/thumb_IMG_1341.jpg",
+        "alt": "1wilson-lane - IMG_1341"
+      },
+      {
+        "src": "/projects/1wilson-lane/IMG_7259.jpg",
+        "thumbnail": "/projects/1wilson-lane/thumb_IMG_7259.jpg",
+        "alt": "1wilson-lane - IMG_7259"
+      }
+    ],
+    "thumbnail": {
+      "src": "/projects/1wilson-lane/1.jpg",
+      "thumbnail": "/projects/1wilson-lane/thumb_1.jpg",
+      "alt": "1wilson-lane - 1"
+    },
+    "slug": "1wilson-lane"
+  },
+  {
+    "id": "2springvale-road",
+    "title": "Springvale Road",
+    "description": "",
+    "category": "residential",
+    "year": 2025,
+    "location": "",
+    "images": [
+      {
+        "src": "/projects/2springvale-road/1.jpg",
+        "thumbnail": "/projects/2springvale-road/thumb_1.jpg",
+        "alt": "2springvale-road - 1"
+      },
+      {
+        "src": "/projects/2springvale-road/1_2.jpg",
+        "thumbnail": "/projects/2springvale-road/thumb_1_2.jpg",
+        "alt": "2springvale-road - 1_2"
+      },
+      {
+        "src": "/projects/2springvale-road/2.jpg",
+        "thumbnail": "/projects/2springvale-road/thumb_2.jpg",
+        "alt": "2springvale-road - 2"
+      },
+      {
+        "src": "/projects/2springvale-road/2_2.jpg",
+        "thumbnail": "/projects/2springvale-road/thumb_2_2.jpg",
+        "alt": "2springvale-road - 2_2"
+      },
+      {
+        "src": "/projects/2springvale-road/3.jpg",
+        "thumbnail": "/projects/2springvale-road/thumb_3.jpg",
+        "alt": "2springvale-road - 3"
+      },
+      {
+        "src": "/projects/2springvale-road/3_2.jpg",
+        "thumbnail": "/projects/2springvale-road/thumb_3_2.jpg",
+        "alt": "2springvale-road - 3_2"
+      },
+      {
+        "src": "/projects/2springvale-road/4.jpg",
+        "thumbnail": "/projects/2springvale-road/thumb_4.jpg",
+        "alt": "2springvale-road - 4"
+      },
+      {
+        "src": "/projects/2springvale-road/5.jpg",
+        "thumbnail": "/projects/2springvale-road/thumb_5.jpg",
+        "alt": "2springvale-road - 5"
+      },
+      {
+        "src": "/projects/2springvale-road/6.jpg",
+        "thumbnail": "/projects/2springvale-road/thumb_6.jpg",
+        "alt": "2springvale-road - 6"
+      }
+    ],
+    "thumbnail": {
+      "src": "/projects/2springvale-road/1.jpg",
+      "thumbnail": "/projects/2springvale-road/thumb_1.jpg",
+      "alt": "2springvale-road - 1"
+    },
+    "slug": "2springvale-road"
+  },
+  {
+    "id": "3watermill-lane",
+    "title": "Watermill Lane",
+    "description": "",
+    "category": "residential",
+    "year": 2025,
+    "location": "",
+    "images": [
+      {
+        "src": "/projects/3watermill-lane/1.jpg",
+        "thumbnail": "/projects/3watermill-lane/thumb_1.jpg",
+        "alt": "3watermill-lane - 1"
+      },
+      {
+        "src": "/projects/3watermill-lane/2.jpg",
+        "thumbnail": "/projects/3watermill-lane/thumb_2.jpg",
+        "alt": "3watermill-lane - 2"
+      },
+      {
+        "src": "/projects/3watermill-lane/3.jpg",
+        "thumbnail": "/projects/3watermill-lane/thumb_3.jpg",
+        "alt": "3watermill-lane - 3"
+      },
+      {
+        "src": "/projects/3watermill-lane/4.jpg",
+        "thumbnail": "/projects/3watermill-lane/thumb_4.jpg",
+        "alt": "3watermill-lane - 4"
+      },
+      {
+        "src": "/projects/3watermill-lane/4_2.jpg",
+        "thumbnail": "/projects/3watermill-lane/thumb_4_2.jpg",
+        "alt": "3watermill-lane - 4_2"
+      },
+      {
+        "src": "/projects/3watermill-lane/5.jpg",
+        "thumbnail": "/projects/3watermill-lane/thumb_5.jpg",
+        "alt": "3watermill-lane - 5"
+      }
+    ],
+    "thumbnail": {
+      "src": "/projects/3watermill-lane/1.jpg",
+      "thumbnail": "/projects/3watermill-lane/thumb_1.jpg",
+      "alt": "3watermill-lane - 1"
+    },
+    "slug": "3watermill-lane"
+  },
+  {
+    "id": "4wapakoneta-road",
+    "title": "Wapakoneta Road",
+    "description": "",
+    "category": "residential",
+    "year": 2025,
+    "location": "",
+    "images": [
+      {
+        "src": "/projects/4wapakoneta-road/1.jpg",
+        "thumbnail": "/projects/4wapakoneta-road/thumb_1.jpg",
+        "alt": "4wapakoneta-road - 1"
+      },
+      {
+        "src": "/projects/4wapakoneta-road/2.jpg",
+        "thumbnail": "/projects/4wapakoneta-road/thumb_2.jpg",
+        "alt": "4wapakoneta-road - 2"
+      },
+      {
+        "src": "/projects/4wapakoneta-road/3.jpg",
+        "thumbnail": "/projects/4wapakoneta-road/thumb_3.jpg",
+        "alt": "4wapakoneta-road - 3"
+      },
+      {
+        "src": "/projects/4wapakoneta-road/3_2.jpg",
+        "thumbnail": "/projects/4wapakoneta-road/thumb_3_2.jpg",
+        "alt": "4wapakoneta-road - 3_2"
+      },
+      {
+        "src": "/projects/4wapakoneta-road/4.jpg",
+        "thumbnail": "/projects/4wapakoneta-road/thumb_4.jpg",
+        "alt": "4wapakoneta-road - 4"
+      },
+      {
+        "src": "/projects/4wapakoneta-road/4_2.jpg",
+        "thumbnail": "/projects/4wapakoneta-road/thumb_4_2.jpg",
+        "alt": "4wapakoneta-road - 4_2"
+      },
+      {
+        "src": "/projects/4wapakoneta-road/5.jpg",
+        "thumbnail": "/projects/4wapakoneta-road/thumb_5.jpg",
+        "alt": "4wapakoneta-road - 5"
+      },
+      {
+        "src": "/projects/4wapakoneta-road/IMG_0873.jpg",
+        "thumbnail": "/projects/4wapakoneta-road/thumb_IMG_0873.jpg",
+        "alt": "4wapakoneta-road - IMG_0873"
+      },
+      {
+        "src": "/projects/4wapakoneta-road/IMG_0894.jpg",
+        "thumbnail": "/projects/4wapakoneta-road/thumb_IMG_0894.jpg",
+        "alt": "4wapakoneta-road - IMG_0894"
+      },
+      {
+        "src": "/projects/4wapakoneta-road/IMG_0914.jpg",
+        "thumbnail": "/projects/4wapakoneta-road/thumb_IMG_0914.jpg",
+        "alt": "4wapakoneta-road - IMG_0914"
+      },
+      {
+        "src": "/projects/4wapakoneta-road/IMG_0926.jpg",
+        "thumbnail": "/projects/4wapakoneta-road/thumb_IMG_0926.jpg",
+        "alt": "4wapakoneta-road - IMG_0926"
+      },
+      {
+        "src": "/projects/4wapakoneta-road/IMG_1048.jpg",
+        "thumbnail": "/projects/4wapakoneta-road/thumb_IMG_1048.jpg",
+        "alt": "4wapakoneta-road - IMG_1048"
+      },
+      {
+        "src": "/projects/4wapakoneta-road/IMG_1146.jpg",
+        "thumbnail": "/projects/4wapakoneta-road/thumb_IMG_1146.jpg",
+        "alt": "4wapakoneta-road - IMG_1146"
+      },
+      {
+        "src": "/projects/4wapakoneta-road/IMG_1149.jpg",
+        "thumbnail": "/projects/4wapakoneta-road/thumb_IMG_1149.jpg",
+        "alt": "4wapakoneta-road - IMG_1149"
+      },
+      {
+        "src": "/projects/4wapakoneta-road/IMG_1251.jpg",
+        "thumbnail": "/projects/4wapakoneta-road/thumb_IMG_1251.jpg",
+        "alt": "4wapakoneta-road - IMG_1251"
+      },
+      {
+        "src": "/projects/4wapakoneta-road/IMG_1258.jpg",
+        "thumbnail": "/projects/4wapakoneta-road/thumb_IMG_1258.jpg",
+        "alt": "4wapakoneta-road - IMG_1258"
+      }
+    ],
+    "thumbnail": {
+      "src": "/projects/4wapakoneta-road/1.jpg",
+      "thumbnail": "/projects/4wapakoneta-road/thumb_1.jpg",
+      "alt": "4wapakoneta-road - 1"
+    },
+    "slug": "4wapakoneta-road"
+  },
+  {
+    "id": "5wolf-run",
+    "title": "Wolf Run",
+    "description": "",
+    "category": "residential",
+    "year": 2025,
+    "location": "",
+    "images": [
+      {
+        "src": "/projects/5wolf-run/9D057658-7CFC-487B-8133-B6B96BBA9DB3_1_105_c.jpg",
+        "thumbnail": "/projects/5wolf-run/thumb_9D057658-7CFC-487B-8133-B6B96BBA9DB3_1_105_c.jpg",
+        "alt": "5wolf-run - 9D057658-7CFC-487B-8133-B6B96BBA9DB3_1_105_c"
+      },
+      {
+        "src": "/projects/5wolf-run/B77FBEF5-9A0B-4810-B817-7730072B1501_1_105_c.jpg",
+        "thumbnail": "/projects/5wolf-run/thumb_B77FBEF5-9A0B-4810-B817-7730072B1501_1_105_c.jpg",
+        "alt": "5wolf-run - B77FBEF5-9A0B-4810-B817-7730072B1501_1_105_c"
+      }
+    ],
+    "thumbnail": {
+      "src": "/projects/5wolf-run/9D057658-7CFC-487B-8133-B6B96BBA9DB3_1_105_c.jpg",
+      "thumbnail": "/projects/5wolf-run/thumb_9D057658-7CFC-487B-8133-B6B96BBA9DB3_1_105_c.jpg",
+      "alt": "5wolf-run - 9D057658-7CFC-487B-8133-B6B96BBA9DB3_1_105_c"
+    },
+    "slug": "5wolf-run"
+  },
+  {
+    "id": "6kiawah",
+    "title": "Kiawah",
+    "description": "",
+    "category": "residential",
+    "year": 2025,
+    "location": "",
+    "images": [
+      {
+        "src": "/projects/6kiawah/0_Ocean_Front_Residence_high_res_thumbnail.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_0_Ocean_Front_Residence_high_res_thumbnail.jpg",
+        "alt": "6kiawah - 0_Ocean_Front_Residence_high_res_thumbnail"
+      },
+      {
+        "src": "/projects/6kiawah/10_Ocean_Front_Residence_high_res_Stair_Tower.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_10_Ocean_Front_Residence_high_res_Stair_Tower.jpg",
+        "alt": "6kiawah - 10_Ocean_Front_Residence_high_res_Stair_Tower"
+      },
+      {
+        "src": "/projects/6kiawah/11_Ocean_Front_Residence_high_res_Helical_Stair.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_11_Ocean_Front_Residence_high_res_Helical_Stair.jpg",
+        "alt": "6kiawah - 11_Ocean_Front_Residence_high_res_Helical_Stair"
+      },
+      {
+        "src": "/projects/6kiawah/12_Ocean_Front_Residence_high_res_Kitchen_Overall_.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_12_Ocean_Front_Residence_high_res_Kitchen_Overall_.jpg",
+        "alt": "6kiawah - 12_Ocean_Front_Residence_high_res_Kitchen_Overall_"
+      },
+      {
+        "src": "/projects/6kiawah/13_Ocean_Front_Residence_high_res_Kitchen.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_13_Ocean_Front_Residence_high_res_Kitchen.jpg",
+        "alt": "6kiawah - 13_Ocean_Front_Residence_high_res_Kitchen"
+      },
+      {
+        "src": "/projects/6kiawah/14_Ocean_Front_Residence_high_res_Bunkbeds.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_14_Ocean_Front_Residence_high_res_Bunkbeds.jpg",
+        "alt": "6kiawah - 14_Ocean_Front_Residence_high_res_Bunkbeds"
+      },
+      {
+        "src": "/projects/6kiawah/15_Ocean_Front_Residence_high_res_Bunkhouse_Game.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_15_Ocean_Front_Residence_high_res_Bunkhouse_Game.jpg",
+        "alt": "6kiawah - 15_Ocean_Front_Residence_high_res_Bunkhouse_Game"
+      },
+      {
+        "src": "/projects/6kiawah/16_Ocean_Front_Residence_high_res_Bunkhouse_Bridge.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_16_Ocean_Front_Residence_high_res_Bunkhouse_Bridge.jpg",
+        "alt": "6kiawah - 16_Ocean_Front_Residence_high_res_Bunkhouse_Bridge"
+      },
+      {
+        "src": "/projects/6kiawah/17_Ocean_Front_Residence_high_res_Dining_Deck_.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_17_Ocean_Front_Residence_high_res_Dining_Deck_.jpg",
+        "alt": "6kiawah - 17_Ocean_Front_Residence_high_res_Dining_Deck_"
+      },
+      {
+        "src": "/projects/6kiawah/18_Ocean_Front_Residence_high_res_Rear_Stair_Detail.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_18_Ocean_Front_Residence_high_res_Rear_Stair_Detail.jpg",
+        "alt": "6kiawah - 18_Ocean_Front_Residence_high_res_Rear_Stair_Detail"
+      },
+      {
+        "src": "/projects/6kiawah/19_Ocean_Front_Residence_high_res_Front_Stair_Detail.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_19_Ocean_Front_Residence_high_res_Front_Stair_Detail.jpg",
+        "alt": "6kiawah - 19_Ocean_Front_Residence_high_res_Front_Stair_Detail"
+      },
+      {
+        "src": "/projects/6kiawah/1_Ocean_Front_Residence_high_res_Ext_Court.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_1_Ocean_Front_Residence_high_res_Ext_Court.jpg",
+        "alt": "6kiawah - 1_Ocean_Front_Residence_high_res_Ext_Court"
+      },
+      {
+        "src": "/projects/6kiawah/20_Ocean_Front_Residence_high_res_Boardwalk_View_of_Pool.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_20_Ocean_Front_Residence_high_res_Boardwalk_View_of_Pool.jpg",
+        "alt": "6kiawah - 20_Ocean_Front_Residence_high_res_Boardwalk_View_of_Pool"
+      },
+      {
+        "src": "/projects/6kiawah/2_Ocean_Front_Residence_high_res_Bunkhouse_and_Bridge_Exterior.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_2_Ocean_Front_Residence_high_res_Bunkhouse_and_Bridge_Exterior.jpg",
+        "alt": "6kiawah - 2_Ocean_Front_Residence_high_res_Bunkhouse_and_Bridge_Exterior"
+      },
+      {
+        "src": "/projects/6kiawah/3_Ocean_Front_Residence_high_res_Pool_Deck_Lounge.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_3_Ocean_Front_Residence_high_res_Pool_Deck_Lounge.jpg",
+        "alt": "6kiawah - 3_Ocean_Front_Residence_high_res_Pool_Deck_Lounge"
+      },
+      {
+        "src": "/projects/6kiawah/4_Ocean_Front_Residence_high_res_Terrace_View.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_4_Ocean_Front_Residence_high_res_Terrace_View.jpg",
+        "alt": "6kiawah - 4_Ocean_Front_Residence_high_res_Terrace_View"
+      },
+      {
+        "src": "/projects/6kiawah/5_Ocean_Front_Residence_high_res_Pool_Deck_Looking_Down_.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_5_Ocean_Front_Residence_high_res_Pool_Deck_Looking_Down_.jpg",
+        "alt": "6kiawah - 5_Ocean_Front_Residence_high_res_Pool_Deck_Looking_Down_"
+      },
+      {
+        "src": "/projects/6kiawah/6_Ocean_Front_Residence_high_res_Pool_Deck.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_6_Ocean_Front_Residence_high_res_Pool_Deck.jpg",
+        "alt": "6kiawah - 6_Ocean_Front_Residence_high_res_Pool_Deck"
+      },
+      {
+        "src": "/projects/6kiawah/7_Ocean_Front_Residence_high_res_Pool_Deck_With_Ocean.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_7_Ocean_Front_Residence_high_res_Pool_Deck_With_Ocean.jpg",
+        "alt": "6kiawah - 7_Ocean_Front_Residence_high_res_Pool_Deck_With_Ocean"
+      },
+      {
+        "src": "/projects/6kiawah/8_Ocean_Front_Residence_high_res_Entry_Stair_and_Tower.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_8_Ocean_Front_Residence_high_res_Entry_Stair_and_Tower.jpg",
+        "alt": "6kiawah - 8_Ocean_Front_Residence_high_res_Entry_Stair_and_Tower"
+      },
+      {
+        "src": "/projects/6kiawah/9_Ocean_Front_Residence_high_res_Front_Entry_.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_9_Ocean_Front_Residence_high_res_Front_Entry_.jpg",
+        "alt": "6kiawah - 9_Ocean_Front_Residence_high_res_Front_Entry_"
+      },
+      {
+        "src": "/projects/6kiawah/DSC_0368_copy.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_DSC_0368_copy.jpg",
+        "alt": "6kiawah - DSC_0368_copy"
+      },
+      {
+        "src": "/projects/6kiawah/DSC_0368_copy_2.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_DSC_0368_copy_2.jpg",
+        "alt": "6kiawah - DSC_0368_copy_2"
+      },
+      {
+        "src": "/projects/6kiawah/Entry_Stair_and_Tower.jpg",
+        "thumbnail": "/projects/6kiawah/thumb_Entry_Stair_and_Tower.jpg",
+        "alt": "6kiawah - Entry_Stair_and_Tower"
+      }
+    ],
+    "thumbnail": {
+      "src": "/projects/6kiawah/0_Ocean_Front_Residence_high_res_thumbnail.jpg",
+      "thumbnail": "/projects/6kiawah/thumb_0_Ocean_Front_Residence_high_res_thumbnail.jpg",
+      "alt": "6kiawah - 0_Ocean_Front_Residence_high_res_thumbnail"
+    },
+    "slug": "6kiawah"
+  },
+  {
+    "id": "kiwi-meditation-cabin",
+    "title": "Kiwi Meditation Cabin",
+    "description": "",
+    "category": "unbuilt",
+    "year": 2025,
+    "location": "",
+    "images": [
+      {
+        "src": "/projects/kiwi-meditation-cabin/TA_KIWI_DESIGN_COMPETITION_BOARDS_1.jpg",
+        "thumbnail": "/projects/kiwi-meditation-cabin/thumb_TA_KIWI_DESIGN_COMPETITION_BOARDS_1.jpg",
+        "alt": "kiwi-meditation-cabin - TA_KIWI_DESIGN_COMPETITION_BOARDS_1"
+      },
+      {
+        "src": "/projects/kiwi-meditation-cabin/TA_KIWI_DESIGN_COMPETITION_BOARDS_2.jpg",
+        "thumbnail": "/projects/kiwi-meditation-cabin/thumb_TA_KIWI_DESIGN_COMPETITION_BOARDS_2.jpg",
+        "alt": "kiwi-meditation-cabin - TA_KIWI_DESIGN_COMPETITION_BOARDS_2"
+      },
+      {
+        "src": "/projects/kiwi-meditation-cabin/TA_KIWI_DESIGN_COMPETITION_BOARDS_3.jpg",
+        "thumbnail": "/projects/kiwi-meditation-cabin/thumb_TA_KIWI_DESIGN_COMPETITION_BOARDS_3.jpg",
+        "alt": "kiwi-meditation-cabin - TA_KIWI_DESIGN_COMPETITION_BOARDS_3"
+      },
+      {
+        "src": "/projects/kiwi-meditation-cabin/TA_KIWI_DESIGN_COMPETITION_BOARDS_4_.jpg",
+        "thumbnail": "/projects/kiwi-meditation-cabin/thumb_TA_KIWI_DESIGN_COMPETITION_BOARDS_4_.jpg",
+        "alt": "kiwi-meditation-cabin - TA_KIWI_DESIGN_COMPETITION_BOARDS_4_"
+      }
+    ],
+    "thumbnail": {
+      "src": "/projects/kiwi-meditation-cabin/TA_KIWI_DESIGN_COMPETITION_BOARDS_1.jpg",
+      "thumbnail": "/projects/kiwi-meditation-cabin/thumb_TA_KIWI_DESIGN_COMPETITION_BOARDS_1.jpg",
+      "alt": "kiwi-meditation-cabin - TA_KIWI_DESIGN_COMPETITION_BOARDS_1"
+    },
+    "slug": "kiwi-meditation-cabin"
+  },
+  {
+    "id": "metsa-library",
+    "title": "Metsa Library",
+    "description": "",
+    "category": "unbuilt",
+    "year": 2025,
+    "location": "",
+    "images": [
+      {
+        "src": "/projects/metsa-library/1.jpg",
+        "thumbnail": "/projects/metsa-library/thumb_1.jpg",
+        "alt": "metsa-library - 1"
+      },
+      {
+        "src": "/projects/metsa-library/2.jpg",
+        "thumbnail": "/projects/metsa-library/thumb_2.jpg",
+        "alt": "metsa-library - 2"
+      },
+      {
+        "src": "/projects/metsa-library/3.jpg",
+        "thumbnail": "/projects/metsa-library/thumb_3.jpg",
+        "alt": "metsa-library - 3"
+      },
+      {
+        "src": "/projects/metsa-library/4.jpg",
+        "thumbnail": "/projects/metsa-library/thumb_4.jpg",
+        "alt": "metsa-library - 4"
+      },
+      {
+        "src": "/projects/metsa-library/5.jpg",
+        "thumbnail": "/projects/metsa-library/thumb_5.jpg",
+        "alt": "metsa-library - 5"
+      },
+      {
+        "src": "/projects/metsa-library/6.jpg",
+        "thumbnail": "/projects/metsa-library/thumb_6.jpg",
+        "alt": "metsa-library - 6"
+      },
+      {
+        "src": "/projects/metsa-library/7.jpg",
+        "thumbnail": "/projects/metsa-library/thumb_7.jpg",
+        "alt": "metsa-library - 7"
+      },
+      {
+        "src": "/projects/metsa-library/8.jpg",
+        "thumbnail": "/projects/metsa-library/thumb_8.jpg",
+        "alt": "metsa-library - 8"
+      }
+    ],
+    "thumbnail": {
+      "src": "/projects/metsa-library/1.jpg",
+      "thumbnail": "/projects/metsa-library/thumb_1.jpg",
+      "alt": "metsa-library - 1"
+    },
+    "slug": "metsa-library"
+  }
+]

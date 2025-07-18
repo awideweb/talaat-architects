@@ -6,8 +6,8 @@ const sharp = require('sharp');
 class ContentProcessor {
   constructor() {
     this.sourceDir = path.join(__dirname, '../content');
-    this.outputDir = path.join(__dirname, '../frontend/public/projects');
-    this.dataDir = path.join(__dirname, '../frontend/src/data');
+    this.outputDir = path.join(__dirname, '../public/projects');
+    this.dataDir = path.join(__dirname, '../src/data');
     this.projects = [];
   }
 

@@ -4,15 +4,14 @@
   "description": "TALAAT STUDIO portfolio website with auto-generated projects",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "dev:backend": "cd backend && npm run dev",
-    "dev:frontend": "cd frontend && npm run dev",
-    "build": "npm run build:content && npm run build:frontend",
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
     "build:content": "node scripts/build-content.js",
-    "build:frontend": "cd frontend && npm run build",
-    "build:production": "npm run build:content && cd frontend && npm run build:production",
-    "start": "cd frontend && npm start",
-    "start:production": "cd frontend && npm run start:production",
+    "build:full": "npm run build:content && npm run build",
+    "build:production": "npm run lint && npm run build:full",
+    "start:production": "next start",
     "content:process": "node scripts/process-content.js",
     "deploy:vercel": "npm run build:production && vercel --prod"
   },
@@ -24,13 +23,27 @@
   ],
   "author": "TALAAT STUDIO",
   "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^8.2.2"
-  },
   "dependencies": {
+    "autoprefixer": "^10.4.21",
+    "framer-motion": "^12.23.6",
     "fs-extra": "^11.3.0",
     "gray-matter": "^4.0.3",
     "marked": "^16.1.1",
-    "sharp": "^0.34.3"
+    "next": "15.4.1",
+    "postcss": "^8.5.6",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "sharp": "^0.34.3",
+    "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "concurrently": "^8.2.2",
+    "eslint": "^9",
+    "eslint-config-next": "15.4.1",
+    "typescript": "^5"
   }
 }
