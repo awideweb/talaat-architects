@@ -8,10 +8,10 @@ export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
-    { name: 'Home', href: '/' },
-    { name: 'Projects', href: '/projects' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Home', href: '/' as const },
+    { name: 'Projects', href: '/projects' as const },
+    { name: 'About', href: '/about' as const },
+    { name: 'Contact', href: '/contact' as const },
   ];
 
   return (
