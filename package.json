@@ -1,0 +1,36 @@
+{
+  "name": "talaat-architects",
+  "version": "1.0.0",
+  "description": "TALAAT STUDIO portfolio website with auto-generated projects",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "npm run build:content && npm run build:frontend",
+    "build:content": "node scripts/build-content.js",
+    "build:frontend": "cd frontend && npm run build",
+    "build:production": "npm run build:content && cd frontend && npm run build:production",
+    "start": "cd frontend && npm start",
+    "start:production": "cd frontend && npm run start:production",
+    "content:process": "node scripts/process-content.js",
+    "deploy:vercel": "npm run build:production && vercel --prod"
+  },
+  "keywords": [
+    "architecture",
+    "portfolio",
+    "next.js",
+    "node.js"
+  ],
+  "author": "TALAAT STUDIO",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "fs-extra": "^11.3.0",
+    "gray-matter": "^4.0.3",
+    "marked": "^16.1.1",
+    "sharp": "^0.34.3"
+  }
+}
