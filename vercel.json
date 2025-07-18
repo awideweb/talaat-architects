@@ -1,16 +1,16 @@
 {
   "version": 2,
-  "buildCommand": "cd frontend && npm run build:full",
-  "outputDirectory": "frontend/.next",
-  "installCommand": "cd frontend && npm install",
+  "buildCommand": "npm run build:full",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
   "functions": {
-    "frontend/src/app/api/projects/route.ts": {
+    "src/app/api/projects/route.ts": {
       "maxDuration": 30
     },
-    "frontend/src/app/api/projects/[slug]/route.ts": {
+    "src/app/api/projects/[slug]/route.ts": {
       "maxDuration": 30
     },
-    "frontend/src/app/api/projects/category/[category]/route.ts": {
+    "src/app/api/projects/category/[category]/route.ts": {
       "maxDuration": 30
     }
   }
