@@ -25,23 +25,23 @@ export default function Navigation() {
       >
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="flex flex-col items-center justify-center w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-all duration-200"
+          className="flex flex-col items-center justify-center w-12 h-12 bg-black/40 backdrop-blur-[2px] rounded-full hover:bg-black/50 transition-all duration-200"
           aria-label="Toggle menu"
         >
           <motion.div
             animate={isMenuOpen ? { rotate: 45, y: 2 } : { rotate: 0, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="w-6 h-0.5 bg-gray-900 mb-1"
+            className="w-6 h-0.5 bg-white mb-1"
           />
           <motion.div
             animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="w-6 h-0.5 bg-gray-900 mb-1"
+            className="w-6 h-0.5 bg-white mb-1"
           />
           <motion.div
             animate={isMenuOpen ? { rotate: -45, y: -2 } : { rotate: 0, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="w-6 h-0.5 bg-gray-900"
+            className="w-6 h-0.5 bg-white"
           />
         </button>
       </motion.div>
@@ -54,7 +54,7 @@ export default function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-24 left-1/2 transform -translate-x-1/2 z-40 bg-white/95 backdrop-blur-sm rounded-lg shadow-xl border border-gray-100"
+            className="fixed top-24 left-1/2 transform -translate-x-1/2 z-40 bg-black/40 backdrop-blur-[2px] rounded-lg border border-white/10"
           >
             <div className="py-4 px-6 min-w-[200px]">
               {menuItems.map((item, index) => (
@@ -66,7 +66,7 @@ export default function Navigation() {
                 >
                   <Link
                     href={item.href}
-                    className="block py-3 px-4 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-all duration-200 font-light text-center"
+                    className="block py-3 px-4 text-white/80 hover:text-white hover:bg-white/10 rounded-md transition-all duration-200 font-light text-center"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}

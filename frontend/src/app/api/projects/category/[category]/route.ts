@@ -4,10 +4,10 @@ import path from 'path';
 
 export async function GET(
   request: Request,
-  context: { params: { category: string } }
+  { params }: { params: Promise<{ category: string }> }
 ) {
   try {
-    const { category } = context.params;
+    const { category } = await params;
     
     // Try multiple possible paths for the projects.json file
     const possiblePaths = [
