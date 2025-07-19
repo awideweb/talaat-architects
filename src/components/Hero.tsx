@@ -399,8 +399,8 @@ export default function Hero() {
                     <div className="absolute left-1/2 top-6 w-3 h-3 lg:w-4 lg:h-4 bg-white rounded-full border-2 border-black/20 transform -translate-x-1/2 z-20 shadow-lg"></div>
                     
                     {/* Visible line segment - hidden where it would pass through the box */}
-                    <div className="absolute left-1/2 top-0 w-px bg-red/40 transform -translate-x-1/2 z-10" style={{height: '1.5rem'}}></div>
-                    <div className="absolute left-1/2 w-px bg-red/40 transform -translate-x-1/2 z-10" style={{bottom: '0', height: '1rem'}}></div>
+                    <div className="absolute left-1/2 top-0 w-px bg-white/40 transform -translate-x-1/2 z-10" style={{height: '1.5rem'}}></div>
+                    <div className="absolute left-1/2 w-px bg-white/40 transform -translate-x-1/2 z-10" style={{bottom: '0', height: '1rem'}}></div>
                     
                     {/* Content Tab */}
                     <div className={`${index === 0 ? 'bg-black/40' : index === 1 ? 'bg-black/38' : index === 2 ? 'bg-black/35' : 'bg-black/35'} backdrop-blur-[2px] p-4 lg:p-6 rounded-lg shadow-xl max-w-sm ${item.side === 'left' ? 'mr-8 lg:mr-12' : 'ml-8 lg:ml-12'}`}>
