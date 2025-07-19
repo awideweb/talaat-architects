@@ -158,13 +158,29 @@ export default function ProjectPage() {
                 transition={{ duration: 0.6, delay: 0.1 * index }}
                 className="relative aspect-video overflow-hidden bg-gray-100"
               >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
-                />
+                {image.src && (
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+                  />
+                )}
+                
+                {/* Fallback for missing image */}
+                {!image.src && (
+                  <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
+                    <div className="text-center text-gray-500">
+                      <div className="w-12 h-12 mx-auto mb-2">
+                        <svg fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <p className="text-sm">Image not available</p>
+                    </div>
+                  </div>
+                )}
               </motion.div>
             ))}
           </motion.div>

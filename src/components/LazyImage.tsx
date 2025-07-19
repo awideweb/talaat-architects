@@ -41,9 +41,9 @@ const LazyImage: React.FC<LazyImageProps> = ({
 
   // Extract image sources
   const getImageSrc = (imageObj: ImageSources | string): string => {
-    if (typeof imageObj === 'string') return imageObj;
+    if (typeof imageObj === 'string') return imageObj || '';
     // Return JPEG as fallback for browser compatibility
-    return imageObj.jpeg || imageObj.webp || imageObj.avif;
+    return imageObj.jpeg || imageObj.webp || imageObj.avif || '';
   };
 
   const mainSrc = getImageSrc(src);
@@ -53,6 +53,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
   useEffect(() => {
     if (priority || !imgRef.current) return;
 
+    const element = imgRef.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -67,12 +68,10 @@ const LazyImage: React.FC<LazyImageProps> = ({
       }
     );
 
-    observer.observe(imgRef.current);
+    observer.observe(element);
 
     return () => {
-      if (imgRef.current) {
-        observer.unobserve(imgRef.current);
-      }
+      observer.unobserve(element);
     };
   }, [priority]);
 
@@ -85,6 +84,26 @@ const LazyImage: React.FC<LazyImageProps> = ({
     setHasError(true);
     onError?.();
   };
+
+  // Prevent rendering if no valid src
+  if (!mainSrc) {
+    return (
+      <div 
+        ref={imgRef}
+        className="relative overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center"
+        style={{ aspectRatio: `${width}/${height}` }}
+      >
+        <div className="text-center text-gray-500 dark:text-gray-400">
+          <div className="w-8 h-8 mx-auto mb-2">
+            <svg fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+            </svg>
+          </div>
+          <p className="text-xs">No image source</p>
+        </div>
+      </div>
+    );
+  }
 
   // Render modern image formats with fallbacks
   const renderPicture = () => {

@@ -9,10 +9,12 @@
     "start": "next start",
     "lint": "next lint",
     "build:content": "node scripts/process-content.js",
+    "build:content:force": "node scripts/process-content.js --force",
     "build:full": "npm run build:content && npm run build",
     "build:production": "npm run lint && npm run build",
     "start:production": "next start",
     "content:process": "node scripts/process-content.js",
+    "content:process:force": "node scripts/process-content.js --force",
     "deploy:vercel": "npm run build:production && vercel --prod"
   },
   "keywords": [

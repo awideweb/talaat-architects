@@ -4,11 +4,12 @@ const matter = require('gray-matter');
 const sharp = require('sharp');
 
 class ContentProcessor {
-  constructor() {
+  constructor(options = {}) {
     this.sourceDir = path.join(__dirname, '../content');
     this.outputDir = path.join(__dirname, '../public/projects');
     this.dataDir = path.join(__dirname, '../src/data');
     this.projects = [];
+    this.forceReprocess = options.force || false;
   }
 
   async processContent() {
@@ -90,14 +91,18 @@ class ContentProcessor {
       frontMatter = parsed.data;
     }
     
-    // Process images
+    // Process images with progress tracking
+    const startTime = Date.now();
     const images = await this.processProjectImages(projectPath, projectOutputDir);
+    const processingTime = Date.now() - startTime;
     
     // Skip projects with no images
     if (images.length === 0) {
       console.log(`⚠️  Skipping ${projectName} - no images found`);
       return;
     }
+    
+    console.log(`✅ Processed ${projectName} (${images.length} images) in ${(processingTime/1000).toFixed(1)}s`);
     
     // Create project data
     const project = {
@@ -133,19 +138,55 @@ class ContentProcessor {
           const baseName = this.sanitizeFileName(file, false);
           const baseOutputPath = path.join(outputDir, baseName);
           
+          // Check if all optimized versions already exist and are newer than source
+          const jpegPath = `${baseOutputPath}.jpg`;
+          const webpPath = `${baseOutputPath}.webp`;
+          const avifPath = `${baseOutputPath}.avif`;
+          const thumbJpegPath = path.join(outputDir, `thumb_${baseName}.jpg`);
+          const thumbWebpPath = path.join(outputDir, `thumb_${baseName}.webp`);
+          const thumbAvifPath = path.join(outputDir, `thumb_${baseName}.avif`);
+          
+          const sourceTime = stats.mtime;
+          const shouldSkip = !this.forceReprocess && await this.shouldSkipImageProcessing(
+            [jpegPath, webpPath, avifPath, thumbJpegPath, thumbWebpPath, thumbAvifPath],
+            sourceTime
+          );
+          
+          if (shouldSkip) {
+            console.log(`⚡ Skipping ${file} - optimized versions already exist`);
+            
+            // Still add to images array for data generation
+            images.push({
+              src: {
+                avif: `/projects/${path.basename(outputDir)}/${baseName}.avif`,
+                webp: `/projects/${path.basename(outputDir)}/${baseName}.webp`,
+                jpeg: `/projects/${path.basename(outputDir)}/${baseName}.jpg`
+              },
+              thumbnail: {
+                avif: `/projects/${path.basename(outputDir)}/thumb_${baseName}.avif`,
+                webp: `/projects/${path.basename(outputDir)}/thumb_${baseName}.webp`,
+                jpeg: `/projects/${path.basename(outputDir)}/thumb_${baseName}.jpg`
+              },
+              alt: `${path.basename(outputDir)} - ${path.parse(file).name}`,
+              width: 1920,
+              height: 1080
+            });
+            continue;
+          }
+          
+          console.log(`🖼️  Processing ${file}...`);
+          
           try {
             const sharpInstance = sharp(filePath)
               .resize(1920, 1080, { fit: 'inside', withoutEnlargement: true });
             
             // Generate JPEG (fallback)
-            const jpegPath = `${baseOutputPath}.jpg`;
             await sharpInstance
               .clone()
               .jpeg({ quality: 85, progressive: true })
               .toFile(jpegPath);
             
             // Generate WebP
-            const webpPath = `${baseOutputPath}.webp`;
             await sharpInstance
               .clone()
               .webp({ quality: 80, effort: 6 })
@@ -227,6 +268,26 @@ class ContentProcessor {
       .trim();
   }
 
+  async shouldSkipImageProcessing(outputPaths, sourceTime) {
+    try {
+      // Check if all output files exist and are newer than source
+      for (const outputPath of outputPaths) {
+        if (!await fs.pathExists(outputPath)) {
+          return false; // File doesn't exist, need to process
+        }
+        
+        const outputStats = await fs.stat(outputPath);
+        if (outputStats.mtime <= sourceTime) {
+          return false; // Output is older than source, need to reprocess
+        }
+      }
+      
+      return true; // All files exist and are newer than source
+    } catch (error) {
+      return false; // On any error, reprocess to be safe
+    }
+  }
+
   formatProjectName(name) {
     return name
       .replace(/^\d+[_-]?/, '') // Remove leading numbers with optional separator
@@ -255,7 +316,19 @@ class ContentProcessor {
 
 // Run if called directly
 if (require.main === module) {
-  const processor = new ContentProcessor();
+  const args = process.argv.slice(2);
+  const options = {
+    force: args.includes('--force') || args.includes('-f')
+  };
+  
+  if (options.force) {
+    console.log('🔄 Force reprocessing enabled - will regenerate all images');
+  } else {
+    console.log('⚡ Smart caching enabled - will skip existing optimized images');
+    console.log('💡 Use --force flag to regenerate all images');
+  }
+  
+  const processor = new ContentProcessor(options);
   processor.processContent().catch(console.error);
 }
 

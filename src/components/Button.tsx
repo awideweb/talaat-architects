@@ -165,16 +165,16 @@ const ButtonComponent = forwardRef<HTMLButtonElement | HTMLAnchorElement, Button
       }
 
       return (
-        <Link href={linkProps.href} passHref legacyBehavior>
-          <motion.a
-            ref={ref as React.Ref<HTMLAnchorElement>}
+        <Link href={linkProps.href}>
+          <motion.div
+            ref={ref as React.Ref<HTMLDivElement>}
             className={buttonClasses}
             whileHover={animate ? { scale: 1.02 } : undefined}
             whileTap={animate ? { scale: 0.98 } : undefined}
             {...(disabled && { 'aria-disabled': true, tabIndex: -1 })}
           >
             {content}
-          </motion.a>
+          </motion.div>
         </Link>
       );
     }

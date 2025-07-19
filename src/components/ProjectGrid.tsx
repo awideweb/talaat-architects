@@ -77,7 +77,7 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
                 role="img"
                 aria-labelledby={`project-${project.id}-title`}
               >
-                {project.thumbnail && (
+                {project.thumbnail && project.thumbnail.thumbnail && (
                   <Image
                     src={project.thumbnail.thumbnail}
                     alt={`${project.title} project thumbnail from ${project.year}${project.location ? ` in ${project.location}` : ''}`}
@@ -86,6 +86,20 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     loading="lazy"
                   />
+                )}
+                
+                {/* Fallback for missing thumbnail */}
+                {(!project.thumbnail || !project.thumbnail.thumbnail) && (
+                  <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
+                    <div className="text-center text-gray-500">
+                      <div className="w-12 h-12 mx-auto mb-2">
+                        <svg fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <p className="text-sm">No image available</p>
+                    </div>
+                  </div>
                 )}
                 
                 {/* Overlay */}
