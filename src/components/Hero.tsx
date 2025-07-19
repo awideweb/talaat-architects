@@ -13,6 +13,7 @@ export default function Hero() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isScrollMenuOpen, setIsScrollMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const menuItems = [
@@ -31,13 +32,17 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  // Handle scroll bounce effect
+  // Handle scroll bounce effect and progress
   const handleScroll = useCallback(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
     const { scrollTop, scrollHeight, clientHeight } = container;
     const isBottom = scrollTop + clientHeight >= scrollHeight - 10;
+    
+    // Calculate scroll progress
+    const progress = (scrollTop / (scrollHeight - clientHeight)) * 100;
+    setScrollProgress(Math.min(progress, 100));
     
     if (isBottom && !isAtBottom) {
       setIsAtBottom(true);
@@ -72,7 +77,12 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden">
+    <header 
+      id="navigation"
+      className="relative w-full h-screen overflow-hidden"
+      role="banner"
+      aria-label="Hero section with studio information and navigation"
+    >
       {/* Background Image Slideshow */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
@@ -280,16 +290,33 @@ export default function Hero() {
             {/* Content Column */}
             <div
               ref={scrollContainerRef}
-              className="bg-black/40 backdrop-blur-[2px] h-[calc(100vh-4rem)] lg:h-[calc(100vh-8rem)] w-full overflow-y-auto custom-scrollbar p-4 lg:p-8 relative transition-transform duration-300 ease-out"
+              className="bg-black/40 backdrop-blur-[2px] h-[calc(100vh-4rem)] lg:h-[calc(100vh-8rem)] w-full overflow-y-auto hide-scrollbar p-4 lg:p-8 relative transition-transform duration-300 ease-out"
               style={{
                 scrollBehavior: 'smooth'
               }}
             >
+              {/* Gradient Fade - Top */}
+              <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-black/40 to-transparent pointer-events-none z-10"></div>
+              
+              {/* Gradient Fade - Bottom */}
+              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/40 to-transparent pointer-events-none z-10"></div>
+
               {/* Timeline Line */}
-              <div className="absolute left-1/2 top-8 bottom-8 w-px bg-white/30 transform -translate-x-1/2"></div>
+              <div className="absolute left-1/2 top-12 bottom-12 w-px bg-white/30 transform -translate-x-1/2"></div>
+
+              {/* Scroll Progress Indicator */}
+              <div className="absolute right-4 top-12 bottom-12 w-px bg-white/20">
+                <motion.div
+                  initial={{ scaleY: 0 }}
+                  animate={{ scaleY: scrollProgress / 100 }}
+                  transition={{ duration: 0.1 }}
+                  className="w-full bg-white/60 origin-top"
+                  style={{ height: '100%' }}
+                />
+              </div>
 
               {/* Timeline Content */}
-              <div className="space-y-12 lg:space-y-16 pt-8 pb-24">
+              <div className="space-y-12 lg:space-y-16 pt-12 pb-12">
                 {timelineContent.map((item, index) => (
                   <motion.div
                     key={index}
@@ -442,6 +469,6 @@ export default function Hero() {
         )}
       </AnimatePresence>
 
-    </section>
+    </header>
   );
 }

@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
-import { UniversalNavigation } from '@/components';
 import Link from 'next/link';
 
 interface Project {
@@ -92,8 +91,6 @@ export default function ProjectPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <UniversalNavigation />
-      
       <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

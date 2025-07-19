@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useState, useCallback } from 'react';
-import { UniversalNavigation, ProjectGrid } from '../../components';
+import { ProjectGrid } from '../../components';
 
 interface Project {
   id: string;
@@ -76,8 +76,6 @@ export default function ProjectsPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <UniversalNavigation />
-      
       <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -4,15 +4,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-TALAAT STUDIO is a modern architectural portfolio website built with Next.js and Node.js. It features automated content generation from image directories, creating a seamless content management system for architectural projects.
+TALAAT STUDIO is a modern architectural portfolio website built with Next.js 15 and a sophisticated automated content management system. It transforms image directories into optimized project portfolios without requiring manual database management.
 
 ## Architecture
 
 ### Full-Stack Structure
-- **Frontend**: Next.js 14 with TypeScript, Tailwind CSS, and Framer Motion
-- **Backend**: Express.js API server for development
-- **Content Processing**: Automated image processing and project generation system
-- **Deployment**: Vercel with serverless functions
+- **Frontend**: Next.js 15 with App Router, TypeScript, Tailwind CSS 4.0 alpha, and Framer Motion
+- **Backend**: Dual approach - Express.js for development + Next.js API routes for production
+- **Content Processing**: Automated image processing pipeline using Sharp with WebP/AVIF optimization
+- **Deployment**: Vercel with serverless functions and 30-second API timeouts
 
 ### Key Components
 - **Content Processor**: Automatically scans project directories and generates optimized images with thumbnails
@@ -30,14 +30,8 @@ npm install
 # Process content from source directories (required after image changes)
 npm run content:process
 
-# Development (starts both frontend and backend)
+# Development with Turbopack (fastest)
 npm run dev
-
-# Frontend only
-npm run dev:frontend
-
-# Backend only  
-npm run dev:backend
 
 # Build for production
 npm run build
@@ -45,35 +39,37 @@ npm run build
 # Production build with linting
 npm run build:production
 
+# Full production build (content processing + build + lint)
+npm run build:full
+
+# Deploy to Vercel
+npm run deploy:vercel
+
 # Start production server
 npm start
 ```
 
-### Content Management
+### Linting and Quality
 ```bash
-# Process new project images and generate thumbnails
-npm run content:process
+# ESLint check
+npm run lint
 
-# Build content for deployment
-npm run build:content
-```
+# Fix ESLint issues
+npm run lint:fix
 
-### Frontend-Specific Commands
-```bash
-cd frontend
-npm run lint          # ESLint check
-npm run build         # Next.js build
-npm run export        # Static export
+# Type checking
+npm run type-check
 ```
 
 ## Content Processing System
 
 The content processor (`scripts/process-content.js`) automatically:
 1. Scans residential and unbuilt project directories
-2. Processes and optimizes images using Sharp
-3. Generates thumbnails with consistent sizing
-4. Creates project metadata in `frontend/src/data/projects.json`
-5. Handles markdown frontmatter for project descriptions
+2. Processes and optimizes images using Sharp (1920x1080 max, 85% quality)
+3. Generates thumbnails with consistent sizing (600x400)
+4. Creates project metadata in `src/data/projects.json`
+5. Outputs processed images to `public/projects/`
+6. Handles markdown frontmatter for project descriptions
 
 ### Project Structure Expected
 ```
@@ -96,16 +92,19 @@ content/
 
 ## Key Configuration Files
 
-- `vercel.json`: Deployment configuration with API routing
-- `frontend/src/config/hero-images.ts`: Hero slideshow configuration
-- `frontend/src/data/projects.json`: Auto-generated project data (do not edit manually)
+- `vercel.json`: Deployment configuration with API routing and 30-second timeouts
+- `next.config.js`: Next.js configuration with image optimization and development API rewrites
+- `tailwind.config.js`: Tailwind CSS 4.0 alpha configuration with custom color variables
+- `src/config/hero-images.ts`: Hero slideshow configuration
+- `src/data/projects.json`: Auto-generated project data (do not edit manually)
 
 ## Development Workflow
 
 1. **Adding New Projects**: Place images in `content/residential/` or `content/unbuilt/` directories, run `npm run content:process`
-2. **Hero Images**: Update `frontend/src/config/hero-images.ts` to modify slideshow
-3. **Styling**: Use Tailwind CSS with custom configurations in `tailwind.config.js`
-4. **API Development**: Backend routes in `backend/index.js`, frontend API routes in `frontend/src/app/api/`
+2. **Hero Images**: Update `src/config/hero-images.ts` to modify slideshow
+3. **Styling**: Use Tailwind CSS 4.0 alpha with custom configurations in `tailwind.config.js`
+4. **API Development**: Next.js API routes in `src/app/api/` (production) or Express.js in `backend/` (development)
+5. **Component Development**: Use TypeScript with strict typing, components in `src/components/`
 
 ## Production Deployment
 
@@ -115,4 +114,19 @@ The application is configured for Vercel deployment with:
 - Static file serving for optimized images
 - Environment-specific configurations
 
-Always run `npm run build:production` before deployment to ensure linting passes and content is properly processed.
+Always run `npm run build:full` before deployment to ensure content processing, linting, and builds all pass.
+
+## Key Architecture Notes
+
+### Session-Based Landing Page
+The landing animation shows once per browser session using `sessionStorage`, providing a smooth first-time user experience without repetitive animations.
+
+### Dual API Architecture
+- **Development**: Express.js server (`backend/index.js`) with hot reloading
+- **Production**: Next.js API routes (`src/app/api/`) as Vercel serverless functions
+
+### Image Processing Pipeline
+The ContentProcessor class handles the complete image workflow from raw uploads to optimized web delivery, supporting WebP/AVIF formats with automatic fallbacks.
+
+### Zero-Database Design
+All content is managed through the file system with generated JSON metadata, eliminating database dependencies while maintaining full CMS capabilities.
