@@ -7,8 +7,22 @@ const remotePatterns = [
     hostname: '*.vercel.app',
   },
   {
+    protocol: 'https',
+    hostname: 'talaatstudio.com',
+  },
+  {
+    protocol: 'https',
+    hostname: '*.talaatstudio.com',
+  },
+  {
     protocol: 'http',
     hostname: 'localhost',
+    port: '3000',
+  },
+  {
+    protocol: 'http',
+    hostname: '10.255.255.254',
+    port: '3000',
   },
 ];
 
@@ -50,47 +64,49 @@ const nextConfig = {
   },
   
   // Configure webpack for better optimization
-  webpack: (config, { dev, isServer }) => {
-    // Add explicit alias resolution
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@': path.resolve(__dirname, 'src'),
-      '@/components': path.resolve(__dirname, 'src/components'),
-      '@/config': path.resolve(__dirname, 'src/config'),
-      '@/data': path.resolve(__dirname, 'src/data'),
-    };
-    
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false,
-    };
+  ...(!dev && {
+    webpack: (config, { isServer }) => {
+      // Add explicit alias resolution
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '@': path.resolve(__dirname, 'src'),
+        '@/components': path.resolve(__dirname, 'src/components'),
+        '@/config': path.resolve(__dirname, 'src/config'),
+        '@/data': path.resolve(__dirname, 'src/data'),
+      };
+      
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
 
-    // Optimize for production
-    if (!dev && !isServer) {
-      config.optimization = {
-        ...config.optimization,
-        splitChunks: {
-          chunks: 'all',
-          cacheGroups: {
-            vendor: {
-              test: /[\\/]node_modules[\\/]/,
-              name: 'vendors',
-              chunks: 'all',
-            },
-            common: {
-              name: 'common',
-              minChunks: 2,
-              priority: 5,
-              chunks: 'all',
-              enforce: true,
+      // Optimize for production
+      if (!isServer) {
+        config.optimization = {
+          ...config.optimization,
+          splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+              vendor: {
+                test: /[\\/]node_modules[\\/]/,
+                name: 'vendors',
+                chunks: 'all',
+              },
+              common: {
+                name: 'common',
+                minChunks: 2,
+                priority: 5,
+                chunks: 'all',
+                enforce: true,
+              },
             },
           },
-        },
-      };
-    }
-    
-    return config;
-  },
+        };
+      }
+      
+      return config;
+    },
+  }),
   
   // Headers for better caching and security
   async headers() {
@@ -126,19 +142,6 @@ const nextConfig = {
   
   // Disable trailing slash
   trailingSlash: false,
-  
-  async rewrites() {
-    // Only apply rewrites in development
-    if (process.env.NODE_ENV === 'development') {
-      return [
-        {
-          source: '/api/:path*',
-          destination: 'http://localhost:3001/api/:path*',
-        },
-      ];
-    }
-    return [];
-  },
 };
 
 module.exports = nextConfig;
