@@ -52,6 +52,9 @@ logs/
 # IDE
 .vscode/
 .idea/
+.development
+.claude
+node_modules
 
 # OS
 .DS_Store
