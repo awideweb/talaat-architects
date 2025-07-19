@@ -129,6 +129,14 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
                 </div>
               </div>
 
+              {/* Project Info */}
+              {project.description && (
+                <div className="mt-4">
+                  <p className="text-gray-400 text-sm line-clamp-2 font-light">
+                    {project.description}
+                  </p>
+                </div>
+              )}
             </div>
           </Link>
         </motion.div>

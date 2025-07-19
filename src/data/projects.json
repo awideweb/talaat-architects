@@ -2,10 +2,10 @@
   {
     "id": "1wilson-lane",
     "title": "Wilson Lane",
-    "description": "A contemporary residential project showcasing modern architectural elements with clean lines and sustainable design. The home features innovative interior spaces that blur the boundaries between indoor and outdoor living.",
+    "description": "",
     "category": "residential",
-    "year": 2024,
-    "location": "DC",
+    "year": 2025,
+    "location": "",
     "images": [
       {
         "src": {
@@ -208,10 +208,10 @@
   {
     "id": "2springvale-road",
     "title": "Springvale Road",
-    "description": "An elegant residential renovation that combines traditional charm with modern functionality. The design emphasizes natural light and open floor plans while respecting the neighborhood's historic character.",
+    "description": "",
     "category": "residential",
-    "year": 2024,
-    "location": "M.D.?",
+    "year": 2025,
+    "location": "",
     "images": [
       {
         "src": {
@@ -369,10 +369,10 @@
   {
     "id": "3watermill-lane",
     "title": "Watermill Lane",
-    "description": "A sophisticated residential design that integrates seamlessly with its natural surroundings. The project features custom millwork and thoughtful material selections that create warm, inviting living spaces.",
+    "description": "",
     "category": "residential",
-    "year": 2024,
-    "location": "M.D.?",
+    "year": 2025,
+    "location": "",
     "images": [
       {
         "src": {
@@ -485,10 +485,10 @@
   {
     "id": "4wapakoneta-road",
     "title": "Wapakoneta Road",
-    "description": "A striking contemporary home that maximizes views and natural light through strategic window placement and open-concept design. The architecture celebrates both privacy and connection to the landscape.",
+    "description": "",
     "category": "residential",
-    "year": 2024,
-    "location": "M.D.?",
+    "year": 2025,
+    "location": "",
     "images": [
       {
         "src": {
@@ -751,10 +751,10 @@
   {
     "id": "5wolf-run",
     "title": "Wolf Run",
-    "description": "A minimalist residential project that emphasizes simplicity and functionality. The design features clean geometric forms and carefully curated spaces that create a serene living environment.",
+    "description": "",
     "category": "residential",
-    "year": 2024,
-    "location": "M.D.?",
+    "year": 2025,
+    "location": "",
     "images": [
       {
         "src": {
@@ -807,10 +807,10 @@
   {
     "id": "6kiawah",
     "title": "Kiawah",
-    "description": "An oceanfront residence that captures breathtaking coastal views while providing sophisticated indoor-outdoor living spaces. The design features elevated walkways, pool terraces, and a distinctive helical stair tower.",
+    "description": "",
     "category": "residential",
-    "year": 2024,
-    "location": "SC",
+    "year": 2025,
+    "location": "",
     "images": [
       {
         "src": {
@@ -1193,10 +1193,10 @@
   {
     "id": "kiwi-meditation-cabin",
     "title": "Kiwi Meditation Cabin",
-    "description": "A competition entry for a small meditation retreat that harmonizes with its natural environment. The design explores minimal intervention architecture with sustainable materials and contemplative spatial experiences.",
+    "description": "",
     "category": "unbuilt",
-    "year": 2023,
-    "location": "New Zealand",
+    "year": 2025,
+    "location": "",
     "images": [
       {
         "src": {
@@ -1279,10 +1279,10 @@
   {
     "id": "metsa-library",
     "title": "Metsa Library",
-    "description": "A conceptual library design that integrates learning spaces with landscape architecture. The proposal emphasizes natural light, flexible study environments, and community gathering spaces within a forest setting.",
+    "description": "",
     "category": "unbuilt",
-    "year": 2023,
-    "location": "Finland",
+    "year": 2025,
+    "location": "",
     "images": [
       {
         "src": {

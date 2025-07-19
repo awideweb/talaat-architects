@@ -8,7 +8,7 @@ interface MobileHeaderProps {
   isScrolled: boolean;
   isMenuOpen: boolean;
   setIsMenuOpen: (isOpen: boolean) => void;
-  buttonRef: React.RefObject<HTMLButtonElement>;
+  buttonRef: React.RefObject<HTMLButtonElement | null>;
 }
 
 export default function MobileHeader({ 
