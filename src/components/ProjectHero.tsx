@@ -39,9 +39,15 @@ export default function ProjectHero({
   images 
 }: ProjectHeroProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isAtBottom, setIsAtBottom] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Navigation functions
+  const goToPrevious = useCallback(() => {
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  }, [images.length]);
+
+  const goToNext = useCallback(() => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  }, [images.length]);
 
   // Auto-advance images (slower than homepage)
   useEffect(() => {
@@ -54,38 +60,6 @@ export default function ProjectHero({
     }
   }, [images.length]);
 
-  // Handle scroll bounce effect and progress
-  const handleScroll = useCallback(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const { scrollTop, scrollHeight, clientHeight } = container;
-    const isBottom = scrollTop + clientHeight >= scrollHeight - 10;
-    
-    // Calculate scroll progress
-    const progress = (scrollTop / (scrollHeight - clientHeight)) * 100;
-    setScrollProgress(Math.min(progress, 100));
-    
-    if (isBottom && !isAtBottom) {
-      setIsAtBottom(true);
-      // Add bounce animation
-      container.style.transform = 'translateY(-10px)';
-      setTimeout(() => {
-        container.style.transform = 'translateY(0)';
-        setTimeout(() => {
-          setIsAtBottom(false);
-        }, 300);
-      }, 150);
-    }
-  }, [isAtBottom]);
-
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    container.addEventListener('scroll', handleScroll);
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, [handleScroll]);
 
   return (
     <header 
@@ -189,7 +163,7 @@ export default function ProjectHero({
               {description}
             </motion.p>
 
-            {/* Image Counter */}
+            {/* Image Counter with Navigation */}
             {images.length > 1 && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
@@ -197,9 +171,33 @@ export default function ProjectHero({
                 transition={{ duration: 0.6, delay: 0.8 }}
                 className="mt-6 pt-6 border-t border-white/20"
               >
-                <div className="text-white/60 text-xs font-light tracking-wide uppercase">
-                  Image {currentImageIndex + 1} of {images.length}
+                {/* Navigation controls */}
+                <div className="flex items-center justify-between mb-2">
+                  <button
+                    onClick={goToPrevious}
+                    className="text-white/60 hover:text-white transition-colors duration-200 p-1"
+                    aria-label="Previous image"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  
+                  <div className="text-white/60 text-xs font-light tracking-wide uppercase">
+                    Image {currentImageIndex + 1} of {images.length}
+                  </div>
+                  
+                  <button
+                    onClick={goToNext}
+                    className="text-white/60 hover:text-white transition-colors duration-200 p-1"
+                    aria-label="Next image"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
                 </div>
+                
                 {/* Progress indicators */}
                 <div className="flex gap-1 mt-2">
                   {images.map((_, index) => (
@@ -216,97 +214,30 @@ export default function ProjectHero({
           </motion.div>
         </motion.div>
 
-        {/* Right Panel - Extended Info (Optional Scroll Content) */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="lg:col-span-2 p-4 lg:p-8 h-full flex items-center justify-center"
-        >
-          <div className="w-full max-w-2xl mx-auto relative">
-            {/* Bottom gradient */}
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/40 via-black/20 to-transparent pointer-events-none z-30"></div>
-            
-            {/* Scrollable Content */}
-            <div
-              ref={scrollContainerRef}
-              className="bg-black/40 backdrop-blur-[2px] h-[60vh] lg:h-[65vh] w-full overflow-y-auto hide-scrollbar p-4 lg:p-8 relative transition-transform duration-300 ease-out"
-              style={{
-                scrollBehavior: 'smooth'
-              }}
-            >
-              {/* Top gradient */}
-              <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-black/40 via-black/20 to-transparent pointer-events-none z-30"></div>
-
-              {/* Scroll Progress Indicator */}
-              <div className="absolute right-4 top-16 bottom-24 w-px bg-white/20">
-                <motion.div
-                  initial={{ scaleY: 0 }}
-                  animate={{ scaleY: scrollProgress / 100 }}
-                  transition={{ duration: 0.1 }}
-                  className="w-full bg-white/60 origin-top"
-                  style={{ height: '100%' }}
-                />
-              </div>
-
-              {/* Extended Project Information */}
-              <div className="space-y-8 pt-16 pb-24 relative">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  className="bg-white/8 backdrop-blur-[2px] p-6 lg:p-8 rounded"
-                >
-                  <h3 className="text-white font-light text-sm lg:text-lg tracking-wide mb-4 uppercase">
-                    Project Details
-                  </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <span className="text-white/60 font-light uppercase tracking-wide block mb-1">Year</span>
-                      <span className="text-white/90">{year}</span>
-                    </div>
-                    <div>
-                      <span className="text-white/60 font-light uppercase tracking-wide block mb-1">Location</span>
-                      <span className="text-white/90">{location}</span>
-                    </div>
-                    <div>
-                      <span className="text-white/60 font-light uppercase tracking-wide block mb-1">Category</span>
-                      <span className="text-white/90">{category}</span>
-                    </div>
-                    <div>
-                      <span className="text-white/60 font-light uppercase tracking-wide block mb-1">Images</span>
-                      <span className="text-white/90">{images.length}</span>
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Scroll hint */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  className="text-center"
-                >
-                  <p className="text-white/60 text-xs lg:text-sm font-light tracking-wide uppercase">
-                    Scroll down to view project gallery
-                  </p>
-                  <motion.div
-                    animate={{ y: [0, 8, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    className="inline-block mt-4"
-                  >
-                    <svg className="w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
-                  </motion.div>
-                </motion.div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        {/* Right Panel - Empty space */}
+        <div className="lg:col-span-2"></div>
       </div>
+
+      {/* Bottom Center Scroll Hint */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 1.0 }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 text-center"
+      >
+        <p className="text-white/60 text-xs lg:text-sm font-light tracking-wide uppercase mb-4">
+          Scroll down to view project gallery
+        </p>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="inline-block"
+        >
+          <svg className="w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </motion.div>
+      </motion.div>
     </header>
   );
 }
