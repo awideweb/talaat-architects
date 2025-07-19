@@ -49,10 +49,6 @@ interface ProjectGridProps {
 }
 
 export default function ProjectGrid({ projects }: ProjectGridProps) {
-  console.log('ProjectGrid: Received', projects.length, 'projects');
-  if (projects.length > 0) {
-    console.log('First project:', projects[0].title, 'thumbnail:', projects[0].thumbnail?.thumbnail?.jpeg);
-  }
   
   const containerVariants = {
     hidden: { opacity: 0 },

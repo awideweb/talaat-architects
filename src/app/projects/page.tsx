@@ -54,7 +54,6 @@ export default function ProjectsPage() {
       try {
         const response = await fetch('/api/projects');
         const data = await response.json();
-        console.log('Loaded projects:', data.length);
         setProjects(data);
       } catch (error) {
         console.error('Error loading projects:', error);
@@ -67,14 +66,11 @@ export default function ProjectsPage() {
   }, []);
 
   const filteredProjects = useMemo(() => {
-    console.log('Filtering projects. Total:', projects.length, 'Category:', selectedCategory);
     if (selectedCategory === 'all') {
       return projects;
     }
     return projects.filter(project => project.category === selectedCategory);
   }, [projects, selectedCategory]);
-
-  console.log('Rendered with filteredProjects:', filteredProjects.length);
 
   const categories = [
     'all',
@@ -147,13 +143,6 @@ export default function ProjectsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            {/* Debug: Show filtered projects count */}
-            <div className="bg-blue-500 text-white p-2 mb-4 rounded">
-              DEBUG: Passing {filteredProjects.length} filtered projects to ProjectGrid
-              {filteredProjects.length > 0 && (
-                <div>First project: {filteredProjects[0].title}</div>
-              )}
-            </div>
             <ProjectGrid projects={filteredProjects} />
           </motion.div>
         </div>

@@ -14,14 +14,34 @@ interface Project {
   year: number;
   location: string;
   images: Array<{
-    src: string;
-    thumbnail: string;
+    src: {
+      avif: string;
+      webp: string;
+      jpeg: string;
+    };
+    thumbnail: {
+      avif: string;
+      webp: string;
+      jpeg: string;
+    };
     alt: string;
+    width: number;
+    height: number;
   }>;
   thumbnail: {
-    src: string;
-    thumbnail: string;
+    src: {
+      avif: string;
+      webp: string;
+      jpeg: string;
+    };
+    thumbnail: {
+      avif: string;
+      webp: string;
+      jpeg: string;
+    };
     alt: string;
+    width: number;
+    height: number;
   } | null;
   slug: string;
 }
@@ -158,9 +178,9 @@ export default function ProjectPage() {
                 transition={{ duration: 0.6, delay: 0.1 * index }}
                 className="relative aspect-video overflow-hidden bg-gray-100"
               >
-                {image.src && (
+                {image.src && image.src.jpeg && (
                   <Image
-                    src={image.src}
+                    src={image.src.jpeg}
                     alt={image.alt}
                     fill
                     className="object-cover"
@@ -169,7 +189,7 @@ export default function ProjectPage() {
                 )}
                 
                 {/* Fallback for missing image */}
-                {!image.src && (
+                {(!image.src || !image.src.jpeg) && (
                   <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
                     <div className="text-center text-gray-500">
                       <div className="w-12 h-12 mx-auto mb-2">

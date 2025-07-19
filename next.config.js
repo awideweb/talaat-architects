@@ -63,50 +63,48 @@ const nextConfig = {
     scrollRestoration: true,
   },
   
-  // Configure webpack for better optimization
-  ...(!dev && {
-    webpack: (config, { isServer }) => {
-      // Add explicit alias resolution
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        '@': path.resolve(__dirname, 'src'),
-        '@/components': path.resolve(__dirname, 'src/components'),
-        '@/config': path.resolve(__dirname, 'src/config'),
-        '@/data': path.resolve(__dirname, 'src/data'),
-      };
-      
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-      };
+  // Configure webpack for better optimization (production only)
+  webpack: process.env.NODE_ENV === 'production' ? (config, { isServer }) => {
+    // Add explicit alias resolution
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname, 'src'),
+      '@/components': path.resolve(__dirname, 'src/components'),
+      '@/config': path.resolve(__dirname, 'src/config'),
+      '@/data': path.resolve(__dirname, 'src/data'),
+    };
+    
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+    };
 
-      // Optimize for production
-      if (!isServer) {
-        config.optimization = {
-          ...config.optimization,
-          splitChunks: {
-            chunks: 'all',
-            cacheGroups: {
-              vendor: {
-                test: /[\\/]node_modules[\\/]/,
-                name: 'vendors',
-                chunks: 'all',
-              },
-              common: {
-                name: 'common',
-                minChunks: 2,
-                priority: 5,
-                chunks: 'all',
-                enforce: true,
-              },
+    // Optimize for production
+    if (!isServer) {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all',
+            },
+            common: {
+              name: 'common',
+              minChunks: 2,
+              priority: 5,
+              chunks: 'all',
+              enforce: true,
             },
           },
-        };
-      }
-      
-      return config;
-    },
-  }),
+        },
+      };
+    }
+    
+    return config;
+  } : undefined,
   
   // Headers for better caching and security
   async headers() {
