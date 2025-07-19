@@ -307,25 +307,22 @@ export default function Hero() {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="lg:col-span-2 p-4 lg:p-8 h-full flex"
+          className="lg:col-span-2 p-4 lg:p-8 h-full flex items-center justify-center"
         >
           <div className="w-full max-w-2xl mx-auto relative">
             {/* Bottom gradient - positioned outside to stay fixed */}
-            <div className="absolute bottom-16 left-0 right-0 h-16 bg-gradient-to-t from-black/40 via-black/20 to-transparent pointer-events-none z-30"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/40 via-black/20 to-transparent pointer-events-none z-30"></div>
             
             {/* Content Column */}
             <div
               ref={scrollContainerRef}
-              className="bg-black/40 backdrop-blur-[2px] h-[calc(100vh-4rem)] lg:h-[calc(100vh-8rem)] w-full overflow-y-auto hide-scrollbar p-4 lg:p-8 relative transition-transform duration-300 ease-out"
+              className="bg-black/40 backdrop-blur-[2px] h-[60vh] lg:h-[65vh] w-full overflow-y-auto hide-scrollbar p-4 lg:p-8 relative transition-transform duration-300 ease-out"
               style={{
                 scrollBehavior: 'smooth'
               }}
             >
               {/* Top gradient - at the very edge */}
               <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-black/40 via-black/20 to-transparent pointer-events-none z-30"></div>
-
-              {/* Timeline Line */}
-              <div className="absolute left-1/2 top-16 bottom-24 w-px bg-white/30 transform -translate-x-1/2"></div>
 
               {/* Scroll Progress Indicator */}
               <div className="absolute right-4 top-16 bottom-24 w-px bg-white/20">
@@ -339,8 +336,12 @@ export default function Hero() {
               </div>
 
               {/* Timeline Content */}
-              <div className="space-y-12 lg:space-y-16 pt-16 pb-24">
-                {timelineContent.map((item, index) => (
+              <div className="space-y-12 lg:space-y-16 pt-16 pb-24 relative">
+                {/* Timeline Items Container */}
+                <div className="relative">
+                  {/* Timeline Line - only extends through timeline items */}
+                  <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/30 transform -translate-x-1/2"></div>
+                  {timelineContent.map((item, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 30 }}
@@ -363,6 +364,7 @@ export default function Hero() {
                     </div>
                   </motion.div>
                 ))}
+                </div>
 
                 {/* Awards Section - Full Width */}
                 <motion.div
