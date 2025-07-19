@@ -66,11 +66,11 @@ export default function Hero() {
     return () => container.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
-  // Handle page scroll for top-right menu
+  // Handle page scroll for top-right menu and mobile header
   useEffect(() => {
     const handlePageScroll = () => {
       const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 100);
+      setIsScrolled(scrollY > 50); // Lowered threshold for better mobile experience
     };
 
     window.addEventListener('scroll', handlePageScroll);
@@ -109,68 +109,98 @@ export default function Hero() {
 
       {/* Main Grid Layout */}
       <div className="relative z-10 h-full grid grid-cols-1 lg:grid-cols-3">
-        {/* Left Panel - Studio Branding */}
+        {/* Mobile Sticky Header */}
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="lg:col-span-1 flex items-center justify-start p-4 lg:p-8"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ 
+            opacity: 1, 
+            y: 0,
+            position: isScrolled ? 'fixed' : 'absolute',
+            top: isScrolled ? 0 : '1rem',
+            left: isScrolled ? 0 : '1rem',
+            right: isScrolled ? 0 : '1rem',
+            width: isScrolled ? '100%' : 'auto',
+            zIndex: isScrolled ? 60 : 20,
+            height: 'auto'
+          }}
+          transition={{ 
+            duration: 0.3, 
+            ease: "easeOut",
+            opacity: { duration: 0.8, delay: 0.2 },
+            y: { duration: 0.8, delay: 0.2 }
+          }}
+          className="lg:hidden"
+          style={{
+            height: 'auto',
+            minHeight: 'auto',
+            maxHeight: 'none'
+          }}
         >
           <motion.div 
             animate={{ 
-              height: isMenuOpen ? 'auto' : 'auto',
-              minHeight: isMenuOpen ? '400px' : 'auto'
+              padding: isScrolled ? '0.75rem' : '1rem',
+              backgroundColor: isScrolled ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.48)',
+              backdropFilter: isScrolled ? 'blur(8px)' : 'blur(2px)',
+              height: 'auto'
             }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="bg-black/48 backdrop-blur-[2px] p-6 lg:p-8 flex flex-col items-center justify-center w-full lg:max-w-xs"
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="w-full"
+            style={{
+              borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.1)' : 'none',
+              minHeight: 'auto',
+              height: 'auto'
+            }}
           >
             {/* Mobile Layout */}
-            <div className="lg:hidden w-full">
-              <div className="flex items-start justify-between w-full">
-                <div className="flex items-center">
-                  {/* Logo */}
-                  <div className="mr-3">
+            <div className="w-full">
+              <div className="flex items-center justify-between w-full">
+                <Link 
+                  href="/"
+                  className="flex items-center focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent rounded-md"
+                  aria-label="TALAAT STUDIO - Return to homepage"
+                >
+                  <div className="mr-2">
                     <Image 
                       src="/tarch_logo_wht.svg" 
                       alt="Talaat Studio Logo" 
-                      width={32}
-                      height={41}
-                      className="w-8 h-auto"
+                      width={24}
+                      height={31}
+                      className="w-6 h-auto"
                     />
                   </div>
                   
                   <div className="text-left">
-                    <h1 className="text-lg font-light text-white tracking-wider">
+                    <h1 className="text-base font-light text-white tracking-wider">
                       TALAAT STUDIO
                     </h1>
-                    <p className="text-white/80 text-xs tracking-wide mt-1 font-light">
+                    <p className="text-white/80 text-xs tracking-wide font-light">
                       ARCHITECTURE
                     </p>
                   </div>
-                </div>
+                </Link>
                 
                 {/* Mobile Hamburger Menu Button */}
                 <motion.button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="flex flex-col items-center justify-center w-10 h-10 bg-black/40 backdrop-blur-[2px] border border-white/10 hover:bg-black/50 transition-all duration-200 ml-4 mt-2"
+                  className="flex flex-col items-center justify-center w-8 h-8 bg-black/40 backdrop-blur-[2px] border border-white/10 hover:bg-black/50 transition-all duration-200 ml-3"
                   aria-label="Toggle menu"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <motion.div
-                    animate={isMenuOpen ? { rotate: 45, y: 2 } : { rotate: 0, y: 0 }}
+                    animate={isMenuOpen ? { rotate: 45, y: 1 } : { rotate: 0, y: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="w-5 h-0.5 bg-white/80 mb-1"
+                    className="w-4 h-0.5 bg-white/80 mb-0.5"
                   />
                   <motion.div
                     animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="w-5 h-0.5 bg-white/80 mb-1"
+                    className="w-4 h-0.5 bg-white/80 mb-0.5"
                   />
                   <motion.div
-                    animate={isMenuOpen ? { rotate: -45, y: -2 } : { rotate: 0, y: 0 }}
+                    animate={isMenuOpen ? { rotate: -45, y: -1 } : { rotate: 0, y: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="w-5 h-0.5 bg-white/80"
+                    className="w-4 h-0.5 bg-white/80"
                   />
                 </motion.button>
               </div>
@@ -210,9 +240,26 @@ export default function Hero() {
                 )}
               </AnimatePresence>
             </div>
+          </motion.div>
+        </motion.div>
 
+        {/* Desktop Left Panel - Studio Branding */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="hidden lg:flex lg:col-span-1 items-center justify-start p-4 lg:p-8"
+        >
+          <motion.div 
+            animate={{ 
+              height: isMenuOpen ? 'auto' : 'auto',
+              minHeight: isMenuOpen ? '400px' : 'auto'
+            }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="bg-black/48 backdrop-blur-[2px] p-6 lg:p-8 flex flex-col items-center justify-center w-full lg:max-w-xs"
+          >
             {/* Desktop Layout */}
-            <div className="hidden lg:block text-center">
+            <div className="text-center">
               {/* Logo */}
               <div className="mb-6">
                 <Image 
@@ -406,42 +453,37 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Top-Right Hamburger Menu (appears on scroll) */}
-      <AnimatePresence>
-        {isScrolled && (
+      {/* Desktop Top-Right Hamburger Menu (always visible) */}
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="hidden sm:block fixed top-8 right-8 z-50"
+      >
+        <motion.button
+          onClick={() => setIsScrollMenuOpen(!isScrollMenuOpen)}
+          className="flex flex-col items-center justify-center w-10 h-10 bg-black/40 backdrop-blur-[2px] border border-white/10 hover:bg-black/50 transition-all duration-200"
+          aria-label="Toggle menu"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 50 }}
+            animate={isScrollMenuOpen ? { rotate: 45, y: 2 } : { rotate: 0, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-8 right-8 z-50"
-          >
-            <motion.button
-              onClick={() => setIsScrollMenuOpen(!isScrollMenuOpen)}
-              className="flex flex-col items-center justify-center w-10 h-10 bg-black/40 backdrop-blur-[2px] border border-white/10 hover:bg-black/50 transition-all duration-200"
-              aria-label="Toggle menu"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.div
-                animate={isScrollMenuOpen ? { rotate: 45, y: 2 } : { rotate: 0, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="w-5 h-0.5 bg-white/80 mb-1"
-              />
-              <motion.div
-                animate={isScrollMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                transition={{ duration: 0.3 }}
-                className="w-5 h-0.5 bg-white/80 mb-1"
-              />
-              <motion.div
-                animate={isScrollMenuOpen ? { rotate: -45, y: -2 } : { rotate: 0, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="w-5 h-0.5 bg-white/80"
-              />
-            </motion.button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            className="w-5 h-0.5 bg-white/80 mb-1"
+          />
+          <motion.div
+            animate={isScrollMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="w-5 h-0.5 bg-white/80 mb-1"
+          />
+          <motion.div
+            animate={isScrollMenuOpen ? { rotate: -45, y: -2 } : { rotate: 0, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="w-5 h-0.5 bg-white/80"
+          />
+        </motion.button>
+      </motion.div>
 
       {/* Slide-out Navigation */}
       <SlideOutNavigation 
