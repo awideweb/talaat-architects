@@ -1,0 +1,44 @@
+/* Frost Glass Effect Variations */
+
+/* Original frost style from Project Details box */
+.frost-light {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* Darker frost variant */
+.frost-dark {
+  background: rgba(0, 0, 0, 0.48);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* Medium frost variant */
+.frost-medium {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Heavy frost variant */
+.frost-heavy {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Subtle frost variant */
+.frost-subtle {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+}
+
+/* Tailwind CSS equivalent classes for reference:
+ * frost-light: bg-white/8 backdrop-blur-[2px]
+ * frost-dark: bg-black/48 backdrop-blur-[2px]
+ * frost-medium: bg-white/12 backdrop-blur-[4px]
+ * frost-heavy: bg-white/15 backdrop-blur-[8px]
+ * frost-subtle: bg-white/4 backdrop-blur-[1px]
+ */

@@ -1,5 +1,6 @@
 // Export all components for easier importing
 export { default as Hero } from './Hero';
+export { default as ProjectHero } from './ProjectHero';
 export { default as Navigation } from './Navigation';
 export { default as UniversalNavigation } from './UniversalNavigation';
 export { default as MobileHeader } from './MobileHeader';
