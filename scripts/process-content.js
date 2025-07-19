@@ -5,7 +5,7 @@ const sharp = require('sharp');
 
 class ContentProcessor {
   constructor(options = {}) {
-    this.sourceDir = path.join(__dirname, '../content');
+    this.sourceDir = path.join(__dirname, '../src/data/projects');
     this.outputDir = path.join(__dirname, '../public/projects');
     this.dataDir = path.join(__dirname, '../src/data');
     this.projects = [];
@@ -303,7 +303,7 @@ class ContentProcessor {
   sanitizeFileName(fileName, includeExtension = true) {
     const ext = path.extname(fileName);
     const name = path.basename(fileName, ext);
-    const sanitized = name.replace(/[^a-zA-Z0-9\-_]/g, '_').replace(/_+/g, '_');
+    const sanitized = name.replace(/[^aA-zZ0-9\-_]/g, '_').replace(/_+/g, '_');
     return includeExtension ? `${sanitized}.jpg` : sanitized;
   }
 

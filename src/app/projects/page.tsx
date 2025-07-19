@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { ProjectGrid } from '../../components';
 
 interface Project {
@@ -46,7 +46,6 @@ interface Project {
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [loading, setLoading] = useState(true);
 
@@ -55,6 +54,7 @@ export default function ProjectsPage() {
       try {
         const response = await fetch('/api/projects');
         const data = await response.json();
+        console.log('Loaded projects:', data.length);
         setProjects(data);
       } catch (error) {
         console.error('Error loading projects:', error);
@@ -66,21 +66,15 @@ export default function ProjectsPage() {
     loadProjects();
   }, []);
 
-  useEffect(() => {
-    // console.log('Filtering projects. Total:', projects.length, 'Category:', selectedCategory);
+  const filteredProjects = useMemo(() => {
+    console.log('Filtering projects. Total:', projects.length, 'Category:', selectedCategory);
     if (selectedCategory === 'all') {
-      setFilteredProjects(projects);
-    } else {
-      setFilteredProjects(
-        projects.filter(project => project.category === selectedCategory)
-      );
+      return projects;
     }
-    // const result = selectedCategory === 'all'
-    //   ? projects
-    //   : projects.filter(project => project.category === selectedCategory);
-    // setFilteredProjects(result);
-    // console.log('After filtering, found:', result.length, 'projects');
+    return projects.filter(project => project.category === selectedCategory);
   }, [projects, selectedCategory]);
+
+  console.log('Rendered with filteredProjects:', filteredProjects.length);
 
   const categories = [
     'all',
@@ -161,16 +155,6 @@ export default function ProjectsPage() {
               )}
             </div>
             <ProjectGrid projects={filteredProjects} />
-          </motion.div>
-
-          {/* Project Count */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="text-center mt-12 text-gray-500"
-          >
-            Showing {filteredProjects.length} of {projects.length} projects
           </motion.div>
         </div>
       </motion.main>

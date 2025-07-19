@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-// import Image from 'next/image';
+import Image from 'next/image';
 import Link from 'next/link';
 
 interface Project {
@@ -49,7 +49,6 @@ interface ProjectGridProps {
 }
 
 export default function ProjectGrid({ projects }: ProjectGridProps) {
-  // Debug: Check if projects are being passed
   console.log('ProjectGrid: Received', projects.length, 'projects');
   if (projects.length > 0) {
     console.log('First project:', projects[0].title, 'thumbnail:', projects[0].thumbnail?.thumbnail?.jpeg);
@@ -77,9 +76,7 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
   if (projects.length === 0) {
     return (
       <div className="text-center py-12">
-        <div className="bg-red-500 text-white p-4 rounded">
-          DEBUG: No projects found! Projects array is empty.
-        </div>
+        <p className="text-gray-500">No projects found.</p>
       </div>
     );
   }
@@ -115,13 +112,12 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
               >
                 {project.thumbnail && project.thumbnail.thumbnail && (
                   <>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src={project.thumbnail.thumbnail.jpeg}
                       alt={`${project.title} project thumbnail from ${project.year}${project.location ? ` in ${project.location}` : ''}`}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      onLoad={() => console.log('Image loaded:', project.thumbnail?.thumbnail?.jpeg)}
-                      onError={() => console.log('Image failed:', project.thumbnail?.thumbnail?.jpeg)}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </>
                 )}
