@@ -148,7 +148,7 @@ export default function ContactPage() {
               </h2>
               <div className="w-16 h-px bg-white/40 mx-auto mb-6"></div>
               <p className="text-white/80 text-sm lg:text-base font-light leading-relaxed">
-                Ready to begin your architectural journey? Let's create something extraordinary together.
+                Ready to begin your architectural journey? Let&apos;s create something extraordinary together.
               </p>
             </div>
 
@@ -217,10 +217,10 @@ export default function ContactPage() {
               {/* Form Header */}
               <div className="mb-8">
                 <h2 className="text-2xl lg:text-3xl font-light text-white tracking-wider mb-4">
-                  Let's Discuss Your Project
+                  Let&apos;s Discuss Your Project
                 </h2>
                 <p className="text-white/70 text-sm lg:text-base font-light leading-relaxed">
-                  Tell us about your vision, and we'll help bring it to life with thoughtful, innovative design.
+                  Tell us about your vision, and we&apos;ll help bring it to life with thoughtful, innovative design.
                 </p>
               </div>
 
@@ -234,7 +234,7 @@ export default function ContactPage() {
                     className="mb-6 p-4 bg-green-500/20 border border-green-500/30 rounded-md"
                   >
                     <p className="text-white text-sm">
-                      Thank you! Your message has been sent successfully. We'll get back to you soon.
+                      Thank you! Your message has been sent successfully. We&apos;ll get back to you soon.
                     </p>
                   </motion.div>
                 )}

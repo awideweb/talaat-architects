@@ -27,7 +27,7 @@ interface BaseButtonProps {
   animate?: boolean;
 }
 
-interface ButtonAsButtonProps extends BaseButtonProps, Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'size'> {
+interface ButtonAsButtonProps extends BaseButtonProps, Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'size' | 'children'> {
   href?: never;
   external?: never;
 }
@@ -181,6 +181,21 @@ const ButtonComponent = forwardRef<HTMLButtonElement | HTMLAnchorElement, Button
 
     // Button variant
     const buttonProps = props as ButtonAsButtonProps;
+    const { 
+      type, 
+      onClick, 
+      onBlur, 
+      onFocus, 
+      onMouseEnter, 
+      onMouseLeave, 
+      'aria-label': ariaLabel, 
+      'aria-describedby': ariaDescribedBy,
+      id,
+      name,
+      value,
+      form,
+      tabIndex
+    } = buttonProps;
     
     return (
       <motion.button
@@ -189,7 +204,19 @@ const ButtonComponent = forwardRef<HTMLButtonElement | HTMLAnchorElement, Button
         disabled={disabled || loading}
         whileHover={animate && !disabled && !loading ? { scale: 1.02 } : undefined}
         whileTap={animate && !disabled && !loading ? { scale: 0.98 } : undefined}
-        {...buttonProps}
+        type={type}
+        onClick={onClick}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        aria-label={ariaLabel}
+        aria-describedby={ariaDescribedBy}
+        id={id}
+        name={name}
+        value={value}
+        form={form}
+        tabIndex={tabIndex}
       >
         {content}
       </motion.button>
@@ -203,38 +230,38 @@ ButtonComponent.displayName = 'Button';
 export default ButtonComponent;
 
 // Convenience components for common use cases
-export const PrimaryButton = (props: Omit<ButtonProps, 'variant'>) => (
+export const PrimaryButton = (props: ButtonProps) => (
   <ButtonComponent variant="primary" {...props} />
 );
 
-export const SecondaryButton = (props: Omit<ButtonProps, 'variant'>) => (
+export const SecondaryButton = (props: ButtonProps) => (
   <ButtonComponent variant="secondary" {...props} />
 );
 
-export const GhostButton = (props: Omit<ButtonProps, 'variant'>) => (
+export const GhostButton = (props: ButtonProps) => (
   <ButtonComponent variant="ghost" {...props} />
 );
 
-export const OutlineButton = (props: Omit<ButtonProps, 'variant'>) => (
+export const OutlineButton = (props: ButtonProps) => (
   <ButtonComponent variant="outline" {...props} />
 );
 
-export const GlassButton = (props: Omit<ButtonProps, 'variant'>) => (
+export const GlassButton = (props: ButtonProps) => (
   <ButtonComponent variant="glass" {...props} />
 );
 
-export const MinimalButton = (props: Omit<ButtonProps, 'variant'>) => (
+export const MinimalButton = (props: ButtonProps) => (
   <ButtonComponent variant="minimal" {...props} />
 );
 
-// Icon-specific convenience components
+// Icon-specific convenience components  
 export const IconButton = ({ 
   icon, 
   'aria-label': ariaLabel, 
   size = 'md',
   variant = 'ghost',
   ...props 
-}: Omit<ButtonProps, 'children'> & { 
+}: (Omit<ButtonAsButtonProps, 'children'> | Omit<ButtonAsLinkProps, 'children'>) & { 
   icon: ReactNode; 
   'aria-label': string;
 }) => (

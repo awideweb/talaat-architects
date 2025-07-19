@@ -30,20 +30,12 @@ const nextConfig = {
   // Enable gzip compression
   compress: true,
   
-  // Optimize CSS
-  optimizeFonts: true,
-  
-  // Enable performance optimizations
-  swcMinify: true,
-  
   // Ensure proper transpilation
   transpilePackages: [],
   
   // Performance experimental features
   experimental: {
     optimizeCss: true,
-    legacyBrowsers: false,
-    browsersListForSwc: true,
     scrollRestoration: true,
   },
   
