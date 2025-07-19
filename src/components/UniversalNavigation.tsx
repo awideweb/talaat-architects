@@ -14,8 +14,8 @@ export default function UniversalNavigation({ hideOnHomepage = true }: Universal
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const desktopButtonRef = useRef<HTMLButtonElement>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const desktopButtonRef = useRef<HTMLButtonElement | null>(null);
   const pathname = usePathname();
 
   // Check if should hide on homepage

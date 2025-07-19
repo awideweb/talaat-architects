@@ -34,6 +34,8 @@ if (process.env.PROD_IMAGE_HOSTNAME) {
   });
 }
 
+const isDev = process.env.NODE_ENV === 'development';
+
 const nextConfig = {
   // Image optimization configuration
   images: {
@@ -59,52 +61,61 @@ const nextConfig = {
   
   // Performance experimental features
   experimental: {
-    optimizeCss: process.env.NODE_ENV === 'development', // Enable only in development to avoid production instability
+    optimizeCss: isDev, // Enable only in development to avoid production instability
     scrollRestoration: true,
   },
   
-  // Configure webpack for better optimization (production only)
-  webpack: process.env.NODE_ENV === 'production' ? (config, { isServer }) => {
-    // Add explicit alias resolution
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@': path.resolve(__dirname, 'src'),
-      '@/components': path.resolve(__dirname, 'src/components'),
-      '@/config': path.resolve(__dirname, 'src/config'),
-      '@/data': path.resolve(__dirname, 'src/data'),
-    };
-    
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false,
-    };
+  // Turbopack configuration (now stable)
+  turbopack: {
+    rules: {
+      // Add any custom Turbopack rules here if needed
+    },
+  },
+  
+  // Configure webpack for better optimization (not used in Turbopack mode)
+  ...(!isDev && {
+    webpack: (config, { isServer }) => {
+      // Add explicit alias resolution
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '@': path.resolve(__dirname, 'src'),
+        '@/components': path.resolve(__dirname, 'src/components'),
+        '@/config': path.resolve(__dirname, 'src/config'),
+        '@/data': path.resolve(__dirname, 'src/data'),
+      };
+      
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
 
-    // Optimize for production
-    if (!isServer) {
-      config.optimization = {
-        ...config.optimization,
-        splitChunks: {
-          chunks: 'all',
-          cacheGroups: {
-            vendor: {
-              test: /[\\/]node_modules[\\/]/,
-              name: 'vendors',
-              chunks: 'all',
-            },
-            common: {
-              name: 'common',
-              minChunks: 2,
-              priority: 5,
-              chunks: 'all',
-              enforce: true,
+      // Optimize for production
+      if (!isServer) {
+        config.optimization = {
+          ...config.optimization,
+          splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+              vendor: {
+                test: /[\\/]node_modules[\\/]/,
+                name: 'vendors',
+                chunks: 'all',
+              },
+              common: {
+                name: 'common',
+                minChunks: 2,
+                priority: 5,
+                chunks: 'all',
+                enforce: true,
+              },
             },
           },
-        },
-      };
-    }
-    
-    return config;
-  } : undefined,
+        };
+      }
+      
+      return config;
+    },
+  }),
   
   // Headers for better caching and security
   async headers() {
