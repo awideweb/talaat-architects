@@ -5,6 +5,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ProjectHero } from '../../../components';
 
 interface Project {
   id: string;
@@ -111,56 +112,37 @@ export default function ProjectPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Project Hero Section */}
+      <ProjectHero
+        title={project.title}
+        description={project.description}
+        year={project.year}
+        location={project.location}
+        category={project.category}
+        images={project.images}
+      />
+
+      {/* Project Gallery Section */}
       <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="pt-32 pb-20"
+        className="py-20"
       >
         <div className="max-w-6xl mx-auto px-4">
-          {/* Back Button */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-8"
-          >
-            <Link 
-              href="/projects" 
-              className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors duration-200"
-            >
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Back to Projects
-            </Link>
-          </motion.div>
-
-          {/* Project Header */}
+          {/* Gallery Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-12"
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
           >
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-6">
-              <div>
-                <h1 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
-                  {project.title}
-                </h1>
-                <div className="flex items-center text-gray-600 space-x-6">
-                  <span className="capitalize">{project.category}</span>
-                  {project.location && <span>{project.location}</span>}
-                  <span>{project.year}</span>
-                </div>
-              </div>
-            </div>
-            
-            {project.description && (
-              <p className="text-lg text-gray-700 max-w-3xl leading-relaxed">
-                {project.description}
-              </p>
-            )}
+            <h2 className="text-3xl font-light text-gray-500 uppercase tracking-wide mb-6">
+              Project Gallery
+            </h2>
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+              Explore the complete collection of project images showcasing design details and spatial qualities.
+            </p>
           </motion.div>
 
           {/* Project Images */}
