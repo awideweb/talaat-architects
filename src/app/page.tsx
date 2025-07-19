@@ -2,8 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { Hero, ProjectGrid, LandingPage } from '../components';
+import { Hero, ProjectGrid, LandingPage, PrimaryButton } from '../components';
 
 interface Project {
   id: string;
@@ -81,42 +80,54 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       <motion.main
+        id="main-content"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
+        role="main"
+        aria-label="Homepage"
       >
         <Hero />
         
-        <section className="py-20 px-4 max-w-7xl mx-auto">
-          <motion.div
+        <section 
+          id="projects"
+          className="py-20 px-4 max-w-7xl mx-auto"
+          aria-labelledby="projects-heading"
+        >
+          <motion.header
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl font-light text-gray-500 uppercase tracking-wide mb-6">
+            <h1 id="projects-heading" className="text-3xl font-light text-gray-500 uppercase tracking-wide mb-6">
               RECENT PROJECTS
-            </h2>
+            </h1>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
               Highly crafted built environments in intimate conversation with their surroundings.
             </p>
-          </motion.div>
+          </motion.header>
           
           <ProjectGrid projects={featuredProjects} />
           
-          <motion.div
+          <motion.footer
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-center mt-16"
+            aria-label="View all projects"
           >
-            <Link
+            <PrimaryButton
               href="/projects"
-              className="inline-block bg-gray-900 text-white px-8 py-3 hover:bg-gray-800 transition-colors duration-300"
+              size="lg"
+              aria-describedby="view-all-desc"
             >
               View All Projects
-            </Link>
-          </motion.div>
+              <span id="view-all-desc" className="sr-only">
+                Navigate to the complete project portfolio page
+              </span>
+            </PrimaryButton>
+          </motion.footer>
         </section>
       </motion.main>
     </div>

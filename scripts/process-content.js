@@ -130,27 +130,70 @@ class ContentProcessor {
           // Skip archive directories and thumbnail files
           if (file.toLowerCase().includes('archive') || file.toLowerCase().startsWith('thumb_')) continue;
           
-          const outputFileName = this.sanitizeFileName(file);
-          const outputPath = path.join(outputDir, outputFileName);
+          const baseName = this.sanitizeFileName(file, false);
+          const baseOutputPath = path.join(outputDir, baseName);
           
           try {
-            // Process and optimize image
-            await sharp(filePath)
-              .jpeg({ quality: 85, progressive: true })
-              .resize(1920, 1080, { fit: 'inside', withoutEnlargement: true })
-              .toFile(outputPath);
+            const sharpInstance = sharp(filePath)
+              .resize(1920, 1080, { fit: 'inside', withoutEnlargement: true });
             
-            // Generate thumbnail
-            const thumbnailPath = path.join(outputDir, `thumb_${outputFileName}`);
-            await sharp(filePath)
+            // Generate JPEG (fallback)
+            const jpegPath = `${baseOutputPath}.jpg`;
+            await sharpInstance
+              .clone()
+              .jpeg({ quality: 85, progressive: true })
+              .toFile(jpegPath);
+            
+            // Generate WebP
+            const webpPath = `${baseOutputPath}.webp`;
+            await sharpInstance
+              .clone()
+              .webp({ quality: 80, effort: 6 })
+              .toFile(webpPath);
+            
+            // Generate AVIF
+            const avifPath = `${baseOutputPath}.avif`;
+            await sharpInstance
+              .clone()
+              .avif({ quality: 75, effort: 6 })
+              .toFile(avifPath);
+            
+            // Generate thumbnails in multiple formats
+            const thumbSharpInstance = sharp(filePath)
+              .resize(600, 400, { fit: 'cover' });
+            
+            const thumbJpegPath = path.join(outputDir, `thumb_${baseName}.jpg`);
+            await thumbSharpInstance
+              .clone()
               .jpeg({ quality: 80 })
-              .resize(600, 400, { fit: 'cover' })
-              .toFile(thumbnailPath);
+              .toFile(thumbJpegPath);
+            
+            const thumbWebpPath = path.join(outputDir, `thumb_${baseName}.webp`);
+            await thumbSharpInstance
+              .clone()
+              .webp({ quality: 75, effort: 6 })
+              .toFile(thumbWebpPath);
+            
+            const thumbAvifPath = path.join(outputDir, `thumb_${baseName}.avif`);
+            await thumbSharpInstance
+              .clone()
+              .avif({ quality: 70, effort: 6 })
+              .toFile(thumbAvifPath);
             
             images.push({
-              src: `/projects/${path.basename(outputDir)}/${outputFileName}`,
-              thumbnail: `/projects/${path.basename(outputDir)}/thumb_${outputFileName}`,
-              alt: `${path.basename(outputDir)} - ${path.parse(file).name}`
+              src: {
+                avif: `/projects/${path.basename(outputDir)}/${baseName}.avif`,
+                webp: `/projects/${path.basename(outputDir)}/${baseName}.webp`,
+                jpeg: `/projects/${path.basename(outputDir)}/${baseName}.jpg`
+              },
+              thumbnail: {
+                avif: `/projects/${path.basename(outputDir)}/thumb_${baseName}.avif`,
+                webp: `/projects/${path.basename(outputDir)}/thumb_${baseName}.webp`,
+                jpeg: `/projects/${path.basename(outputDir)}/thumb_${baseName}.jpg`
+              },
+              alt: `${path.basename(outputDir)} - ${path.parse(file).name}`,
+              width: 1920,
+              height: 1080
             });
             
           } catch (error) {
@@ -196,11 +239,11 @@ class ContentProcessor {
       .trim();
   }
 
-  sanitizeFileName(fileName) {
+  sanitizeFileName(fileName, includeExtension = true) {
     const ext = path.extname(fileName);
     const name = path.basename(fileName, ext);
     const sanitized = name.replace(/[^a-zA-Z0-9\-_]/g, '_').replace(/_+/g, '_');
-    return `${sanitized}.jpg`; // Always output as JPG
+    return includeExtension ? `${sanitized}.jpg` : sanitized;
   }
 
   async generateProjectsData() {

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
 import "./globals.css";
+import SkipLinks from "../components/SkipLinks";
+import UniversalNavigation from "../components/UniversalNavigation";
+import Footer from "../components/Footer";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -23,7 +26,10 @@ export default function RootLayout({
       <body
         className={`${urbanist.variable} font-sans antialiased`}
       >
+        <SkipLinks />
+        <UniversalNavigation />
         {children}
+        <Footer />
       </body>
     </html>
   );
