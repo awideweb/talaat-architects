@@ -9,12 +9,12 @@ const PORT = process.env.PORT || 3001;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../frontend/public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Routes
 app.get('/api/projects', async (req, res) => {
   try {
-    const projectsPath = path.join(__dirname, '../frontend/src/data/projects.json');
+    const projectsPath = path.join(__dirname, '../src/data/projects.json');
     
     if (!await fs.pathExists(projectsPath)) {
       return res.status(404).json({ error: 'Projects data not found' });
@@ -31,7 +31,7 @@ app.get('/api/projects', async (req, res) => {
 app.get('/api/projects/:slug', async (req, res) => {
   try {
     const { slug } = req.params;
-    const projectsPath = path.join(__dirname, '../frontend/src/data/projects.json');
+    const projectsPath = path.join(__dirname, '../src/data/projects.json');
     
     if (!await fs.pathExists(projectsPath)) {
       return res.status(404).json({ error: 'Projects data not found' });
@@ -54,7 +54,7 @@ app.get('/api/projects/:slug', async (req, res) => {
 app.get('/api/projects/category/:category', async (req, res) => {
   try {
     const { category } = req.params;
-    const projectsPath = path.join(__dirname, '../frontend/src/data/projects.json');
+    const projectsPath = path.join(__dirname, '../src/data/projects.json');
     
     if (!await fs.pathExists(projectsPath)) {
       return res.status(404).json({ error: 'Projects data not found' });

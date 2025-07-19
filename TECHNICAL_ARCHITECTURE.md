@@ -359,7 +359,7 @@ import { motion } from 'framer-motion'; // Good: tree-shakeable
 import { debounce } from 'lodash/debounce'; // Good: specific function
 
 // Avoid full library imports
-import * as _ from 'lodash'; // Bad: imports entire library
+import * as _ from 'lodash'; // Bad: imports entire library.
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'; // Better
 ```
 
