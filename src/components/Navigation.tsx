@@ -2,7 +2,6 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
 import SlideOutNavigation from './SlideOutNavigation';
 
 export default function Navigation() {

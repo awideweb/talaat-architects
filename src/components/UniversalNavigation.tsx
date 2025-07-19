@@ -2,9 +2,9 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import SlideOutNavigation from './SlideOutNavigation';
+import MobileHeader from './MobileHeader';
 
 interface UniversalNavigationProps {
   hideOnHomepage?: boolean;
@@ -12,10 +12,10 @@ interface UniversalNavigationProps {
 
 export default function UniversalNavigation({ hideOnHomepage = true }: UniversalNavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [isHeaderShrunk, setIsHeaderShrunk] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const desktopButtonRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
 
   // Check if should hide on homepage
@@ -25,16 +25,9 @@ export default function UniversalNavigation({ hideOnHomepage = true }: Universal
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
       
       // Header state based on scroll
-      setIsScrolled(scrollY > 20);
-      setIsHeaderShrunk(scrollY > 100);
-      
-      // Scroll progress calculation
-      const progress = (scrollY / (documentHeight - windowHeight)) * 100;
-      setScrollProgress(Math.min(progress, 100));
+      setIsScrolled(scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -45,15 +38,21 @@ export default function UniversalNavigation({ hideOnHomepage = true }: Universal
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isMenuOpen) {
-        setIsMenuOpen(false);
-        buttonRef.current?.focus();
+      if (event.key === 'Escape') {
+        if (isMenuOpen) {
+          setIsMenuOpen(false);
+          buttonRef.current?.focus();
+        }
+        if (isDesktopMenuOpen) {
+          setIsDesktopMenuOpen(false);
+          desktopButtonRef.current?.focus();
+        }
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isDesktopMenuOpen]);
 
 
   // Hide on homepage if specified - after all hooks
@@ -63,137 +62,60 @@ export default function UniversalNavigation({ hideOnHomepage = true }: Universal
 
   return (
     <>
-      {/* Main Header */}
-      <motion.header
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ 
-          y: 0, 
-          opacity: 1,
-          height: isHeaderShrunk ? '60px' : '80px'
-        }}
-        transition={{ 
-          y: { duration: 0.6 },
-          opacity: { duration: 0.6 },
-          height: { duration: 0.3, ease: "easeOut" }
-        }}
-        className={`fixed top-0 left-0 right-0 z-header transition-all duration-300 ${
-          isScrolled 
-            ? 'dark-blur-darkest shadow-lg border-b border-white/10' 
-            : 'bg-transparent'
-        }`}
-        role="banner"
-        aria-label="Site navigation"
+      {/* Mobile Header */}
+      <MobileHeader 
+        isScrolled={isScrolled}
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        buttonRef={buttonRef}
+      />
+
+      {/* Desktop Top-Right Hamburger Menu (always visible) */}
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="hidden sm:block fixed top-8 right-8 z-50"
       >
-        <div className="w-full h-full flex items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Logo */}
+        <motion.button
+          ref={desktopButtonRef}
+          onClick={() => setIsDesktopMenuOpen(!isDesktopMenuOpen)}
+          className="flex flex-col items-center justify-center w-10 h-10 bg-black/40 backdrop-blur-[2px] border border-white/10 hover:bg-black/50 transition-all duration-200"
+          aria-label="Toggle menu"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
           <motion.div
-            animate={{ 
-              scale: isHeaderShrunk ? 0.85 : 1,
-              opacity: isScrolled ? 1 : 0.9
-            }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="flex-shrink-0"
-          >
-            <Link 
-              href="/"
-              className="block focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent rounded-md"
-              aria-label="TALAAT STUDIO - Return to homepage"
-            >
-              <div className="text-white">
-                <h1 className={`font-light tracking-wider leading-none transition-all duration-300 ${
-                  isHeaderShrunk ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'
-                }`}>
-                  TALAAT
-                </h1>
-                <h2 className={`font-light tracking-wider leading-none transition-all duration-300 ${
-                  isHeaderShrunk ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'
-                }`}>
-                  STUDIO
-                </h2>
-              </div>
-            </Link>
-          </motion.div>
+            animate={isDesktopMenuOpen ? { rotate: 45, y: 2 } : { rotate: 0, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="w-5 h-0.5 bg-white/80 mb-1"
+          />
+          <motion.div
+            animate={isDesktopMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="w-5 h-0.5 bg-white/80 mb-1"
+          />
+          <motion.div
+            animate={isDesktopMenuOpen ? { rotate: -45, y: -2 } : { rotate: 0, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="w-5 h-0.5 bg-white/80"
+          />
+        </motion.button>
+      </motion.div>
 
-          {/* Center - Page indicator (optional) */}
-          <div className="hidden md:flex items-center">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isScrolled ? 1 : 0 }}
-              transition={{ duration: 0.3 }}
-              className="text-white/70 text-sm font-light tracking-wide uppercase"
-            >
-              {pathname === '/projects' && 'Projects'}
-              {pathname === '/about' && 'About'}
-              {pathname === '/contact' && 'Contact'}
-              {pathname.startsWith('/projects/') && 'Project Details'}
-            </motion.div>
-          </div>
-
-          {/* Hamburger Menu Button */}
-          <motion.button
-            ref={buttonRef}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            animate={{ 
-              scale: isHeaderShrunk ? 0.9 : 1 
-            }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className={`flex flex-col items-center justify-center rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent ${
-              isHeaderShrunk ? 'w-10 h-10' : 'w-12 h-12'
-            } ${
-              isScrolled 
-                ? 'bg-white/10 hover:bg-white/20 backdrop-blur-sm' 
-                : 'bg-black/40 hover:bg-black/50 backdrop-blur-[2px]'
-            }`}
-            aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            aria-expanded={isMenuOpen}
-            aria-haspopup="true"
-            aria-controls="universal-navigation-menu"
-          >
-            <motion.div
-              animate={isMenuOpen ? { rotate: 45, y: 2 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className={`bg-white transition-all duration-300 ${
-                isHeaderShrunk ? 'w-5 h-0.5 mb-0.5' : 'w-6 h-0.5 mb-1'
-              }`}
-              aria-hidden="true"
-            />
-            <motion.div
-              animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              className={`bg-white transition-all duration-300 ${
-                isHeaderShrunk ? 'w-5 h-0.5 mb-0.5' : 'w-6 h-0.5 mb-1'
-              }`}
-              aria-hidden="true"
-            />
-            <motion.div
-              animate={isMenuOpen ? { rotate: -45, y: -2 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className={`bg-white transition-all duration-300 ${
-                isHeaderShrunk ? 'w-5 h-0.5' : 'w-6 h-0.5'
-              }`}
-              aria-hidden="true"
-            />
-          </motion.button>
-        </div>
-
-        {/* Scroll Progress Bar */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: scrollProgress / 100 }}
-          transition={{ duration: 0.1 }}
-          className="absolute bottom-0 left-0 h-px bg-white/30 origin-left"
-          style={{ width: '100%' }}
-          aria-hidden="true"
-        />
-      </motion.header>
-
-      {/* Slide-out Navigation */}
+      {/* Mobile Slide-out Navigation */}
       <SlideOutNavigation 
         isOpen={isMenuOpen} 
         onItemClick={() => setIsMenuOpen(false)} 
       />
 
-      {/* Overlay */}
+      {/* Desktop Slide-out Navigation */}
+      <SlideOutNavigation 
+        isOpen={isDesktopMenuOpen} 
+        onItemClick={() => setIsDesktopMenuOpen(false)} 
+      />
+
+      {/* Mobile Overlay */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -201,18 +123,28 @@ export default function UniversalNavigation({ hideOnHomepage = true }: Universal
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-overlay"
+            className="sm:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-overlay"
             onClick={() => setIsMenuOpen(false)}
             aria-hidden="true"
           />
         )}
       </AnimatePresence>
 
-      {/* Spacer for fixed header */}
-      <div 
-        className={`transition-all duration-300 ${isHeaderShrunk ? 'h-15' : 'h-20'}`}
-        aria-hidden="true"
-      />
+      {/* Desktop Overlay */}
+      <AnimatePresence>
+        {isDesktopMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="hidden sm:block fixed inset-0 bg-black/20 backdrop-blur-sm z-overlay"
+            onClick={() => setIsDesktopMenuOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+      </AnimatePresence>
+
     </>
   );
 }

@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 interface StickyHeaderProps {
@@ -96,12 +97,25 @@ export default function StickyHeader({
           >
             <Link
               href="/"
-              className="focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent rounded-md px-2 py-1"
+              className="flex items-center focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent rounded-md px-2 py-1"
               aria-label="TALAAT STUDIO - Return to homepage"
             >
-              <div className="text-white font-light tracking-wider">
-                <span className="text-lg lg:text-xl">TALAAT</span>
-                <span className="text-lg lg:text-xl ml-2">STUDIO</span>
+              <div className="mr-2">
+                <Image 
+                  src="/tarch_logo_wht.svg" 
+                  alt="Talaat Studio Logo" 
+                  width={24}
+                  height={31}
+                  className="w-6 h-auto"
+                />
+              </div>
+              <div className="text-left">
+                <h1 className="text-base font-light text-white tracking-wider">
+                  TALAAT STUDIO
+                </h1>
+                <p className="text-white/80 text-xs tracking-wide font-light">
+                  ARCHITECTURE
+                </p>
               </div>
             </Link>
           </motion.div>
