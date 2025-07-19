@@ -352,22 +352,22 @@ export default function Hero() {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="lg:col-span-2 p-4 lg:p-8 h-full flex items-center justify-center"
+          className="lg:col-span-2 p-4 lg:p-8 h-full flex items-center justify-end"
         >
-          <div className="w-full max-w-2xl mx-auto relative">
-            {/* Bottom gradient - positioned outside to stay fixed */}
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/40 via-black/20 to-transparent pointer-events-none z-30"></div>
+          <div className="w-full lg:max-w-lg relative">
+            {/* Bottom gradient - HIDDEN for right column only */}
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-transparent pointer-events-none z-30"></div>
             
             {/* Content Column */}
             <div
               ref={scrollContainerRef}
-              className="bg-black/40 backdrop-blur-[2px] h-[60vh] lg:h-[65vh] w-full overflow-y-auto hide-scrollbar p-4 lg:p-8 relative transition-transform duration-300 ease-out"
+              className="bg-transparent backdrop-blur-none h-[55vh] lg:h-[60vh] w-full overflow-y-auto hide-scrollbar p-4 lg:p-6 relative transition-transform duration-300 ease-out"
               style={{
                 scrollBehavior: 'smooth'
               }}
             >
-              {/* Top gradient - at the very edge */}
-              <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-black/40 via-black/20 to-transparent pointer-events-none z-30"></div>
+              {/* Top gradient - HIDDEN for right column only */}
+              <div className="absolute top-0 left-0 right-0 h-16 bg-transparent pointer-events-none z-30"></div>
 
               {/* Scroll Progress Indicator */}
               <div className="absolute right-4 top-16 bottom-24 w-px bg-white/20">
@@ -381,11 +381,11 @@ export default function Hero() {
               </div>
 
               {/* Timeline Content */}
-              <div className="space-y-12 lg:space-y-16 pt-16 pb-24 relative">
+              <div className="space-y-8 lg:space-y-10 pt-12 pb-24 relative">
                 {/* Timeline Items Container */}
                 <div className="relative">
-                  {/* Timeline Line - only extends through timeline items */}
-                  <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/30 transform -translate-x-1/2"></div>
+                  {/* Extended Timeline Line - implies more content above and below */}
+                  <div className="absolute left-1/2 -top-12 w-px bg-white/30 transform -translate-x-1/2" style={{height: 'calc(100% + 6rem)'}}></div>
                   {timelineContent.map((item, index) => (
                   <motion.div
                     key={index}
@@ -393,13 +393,17 @@ export default function Hero() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true, margin: "-50px" }}
-                    className={`relative flex ${item.side === 'left' ? 'justify-start pr-4 lg:pr-8' : 'justify-end pl-4 lg:pl-8'}`}
+                    className={`relative flex mb-8 lg:mb-10 ${item.side === 'left' ? 'justify-start pr-2 lg:pr-4' : 'justify-end pl-2 lg:pl-4'}`}
                   >
-                    {/* Timeline Dot */}
-                    <div className="absolute left-1/2 top-4 w-2 h-2 lg:w-3 lg:h-3 bg-white rounded-full transform -translate-x-1/2 z-10"></div>
+                    {/* Timeline Dot with enhanced visibility */}
+                    <div className="absolute left-1/2 top-6 w-3 h-3 lg:w-4 lg:h-4 bg-white rounded-full border-2 border-black/20 transform -translate-x-1/2 z-20 shadow-lg"></div>
+                    
+                    {/* Visible line segment - hidden where it would pass through the box */}
+                    <div className="absolute left-1/2 top-0 w-px bg-red/40 transform -translate-x-1/2 z-10" style={{height: '1.5rem'}}></div>
+                    <div className="absolute left-1/2 w-px bg-red/40 transform -translate-x-1/2 z-10" style={{bottom: '0', height: '1rem'}}></div>
                     
                     {/* Content Tab */}
-                    <div className={`bg-white/8 backdrop-blur-[2px] p-6 lg:p-8 rounded max-w-xs ${item.side === 'left' ? 'mr-4 lg:mr-8' : 'ml-4 lg:ml-8'}`}>
+                    <div className={`${index === 0 ? 'bg-black/40' : index === 1 ? 'bg-black/38' : index === 2 ? 'bg-black/35' : 'bg-black/35'} backdrop-blur-[2px] p-4 lg:p-6 rounded-lg shadow-xl max-w-sm ${item.side === 'left' ? 'mr-8 lg:mr-12' : 'ml-8 lg:ml-12'}`}>
                       <h3 className="text-white font-light text-xs lg:text-sm tracking-wide mb-3 lg:mb-4 uppercase">
                         {item.title}
                       </h3>
@@ -430,7 +434,7 @@ export default function Hero() {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: index * 0.1 }}
                         viewport={{ once: true }}
-                        className="bg-white/5 backdrop-blur-[1px] p-4 rounded border border-white/10"
+                        className="bg-black/48 backdrop-blur-[2px] p-4 rounded border border-white/10"
                       >
                         <div className="flex justify-between items-start mb-2">
                           <h4 className="text-white font-light text-xs lg:text-sm tracking-wide uppercase flex-1">
