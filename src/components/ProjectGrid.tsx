@@ -82,7 +82,7 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-1 lg:grid-cols-2 gap-12"
+      className="grid grid-cols-1 lg:grid-cols-2 gap-12 justify-items-center"
     >
       {projects.map((project) => (
         <motion.div
@@ -90,6 +90,7 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
           variants={itemVariants}
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
+          className="w-full max-w-2xl"
         >
           <Link href={`/projects/${project.slug}`}>
             <div className="group cursor-pointer">

@@ -127,34 +127,32 @@ export default function Hero() {
             {/* Mobile Layout */}
             <div className="lg:hidden w-full">
               <div className="flex items-start justify-between w-full">
-                <div className="text-left">
+                <div className="flex items-center">
                   {/* Logo */}
-                  <div className="mb-4">
+                  <div className="mr-3">
                     <Image 
                       src="/tarch_logo_wht.svg" 
                       alt="Talaat Studio Logo" 
-                      width={40}
-                      height={51}
-                      className="w-10 h-auto"
+                      width={32}
+                      height={41}
+                      className="w-8 h-auto"
                     />
                   </div>
                   
-                  <h1 className="text-xl font-light text-white tracking-wider">
-                    TALAAT
-                  </h1>
-                  <h2 className="text-xl font-light text-white tracking-wider mt-1">
-                    STUDIO
-                  </h2>
-                  <div className="w-16 h-px bg-white/60 mt-4"></div>
-                  <p className="text-white/80 text-xs tracking-wide mt-2 font-light">
-                    ARCHITECTURE
-                  </p>
+                  <div className="text-left">
+                    <h1 className="text-lg font-light text-white tracking-wider">
+                      TALAAT STUDIO
+                    </h1>
+                    <p className="text-white/80 text-xs tracking-wide mt-1 font-light">
+                      ARCHITECTURE
+                    </p>
+                  </div>
                 </div>
                 
                 {/* Mobile Hamburger Menu Button */}
                 <motion.button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="flex flex-col items-center justify-center w-10 h-10 hover:bg-white/10 rounded-full transition-all duration-200 ml-4 mt-2"
+                  className="flex flex-col items-center justify-center w-10 h-10 bg-black/40 backdrop-blur-[2px] border border-white/10 hover:bg-black/50 transition-all duration-200 ml-4 mt-2"
                   aria-label="Toggle menu"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -241,7 +239,7 @@ export default function Hero() {
               <div className="flex justify-center w-full mt-6">
                 <motion.button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="flex flex-col items-center justify-center w-10 h-10 hover:bg-white/10 rounded-full transition-all duration-200"
+                  className="flex flex-col items-center justify-center w-10 h-10 bg-black/40 backdrop-blur-[2px] border border-white/10 hover:bg-black/50 transition-all duration-200"
                   aria-label="Toggle menu"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -420,7 +418,7 @@ export default function Hero() {
           >
             <motion.button
               onClick={() => setIsScrollMenuOpen(!isScrollMenuOpen)}
-              className="flex flex-col items-center justify-center w-10 h-10 bg-black/48 backdrop-blur-[2px] rounded-full hover:bg-black/60 transition-all duration-200"
+              className="flex flex-col items-center justify-center w-10 h-10 bg-black/40 backdrop-blur-[2px] border border-white/10 hover:bg-black/50 transition-all duration-200"
               aria-label="Toggle menu"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

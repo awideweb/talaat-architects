@@ -97,12 +97,9 @@ export default function Footer({ className = '', variant = 'default' }: FooterPr
               className="space-y-6"
             >
               <div>
-                <h3 className="text-white font-light text-2xl lg:text-3xl tracking-wider mb-4">
-                  TALAAT
+                <h3 className="text-white font-light text-lg lg:text-2xl tracking-wider mb-6">
+                  TALAAT STUDIO
                 </h3>
-                <h4 className="text-white font-light text-2xl lg:text-3xl tracking-wider mb-6">
-                  STUDIO
-                </h4>
                 <div className="w-16 h-px bg-white/40 mb-6"></div>
                 <p className="text-white/70 text-sm font-light leading-relaxed max-w-sm">
                   Highly crafted built environments in intimate conversation with their surroundings. 

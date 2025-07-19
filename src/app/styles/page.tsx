@@ -91,7 +91,7 @@ export default function StyleGuidePage() {
           
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className="px-4 py-2 rounded-md bg-white/10 hover:bg-white/20 text-white text-sm font-light transition-colors duration-200"
+            className="px-4 py-3 lg:px-6 lg:py-4 bg-black/40 backdrop-blur-[2px] border border-white/10 hover:bg-black/50 text-white text-xs lg:text-sm font-light uppercase tracking-wide transition-colors duration-200"
           >
             {darkMode ? 'Light Mode' : 'Dark Mode'}
           </button>

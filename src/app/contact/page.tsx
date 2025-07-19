@@ -401,10 +401,10 @@ export default function ContactPage() {
                   disabled={isSubmitting}
                   whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                   whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                  className={`w-full py-4 px-6 rounded-md font-light text-sm tracking-wide transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent ${
+                  className={`w-full py-3 px-4 lg:py-4 lg:px-6 font-light text-xs lg:text-sm tracking-wide uppercase backdrop-blur-[2px] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent ${
                     isSubmitting
-                      ? 'bg-white/10 text-white/50 cursor-not-allowed'
-                      : 'bg-white/15 hover:bg-white/25 text-white border border-white/20 hover:border-white/30'
+                      ? 'bg-black/20 text-white/50 cursor-not-allowed border border-white/10'
+                      : 'bg-black/40 hover:bg-black/50 text-white border border-white/10'
                   }`}
                 >
                   {isSubmitting ? (

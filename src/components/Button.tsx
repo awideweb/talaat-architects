@@ -42,7 +42,7 @@ interface ButtonAsLinkProps extends BaseButtonProps {
 type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps;
 
 const getVariantStyles = (variant: ButtonVariant, disabled: boolean) => {
-  const base = "font-light tracking-wide transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
+  const base = "font-light tracking-wide uppercase transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
   
   if (disabled) {
     return `${base} opacity-50 cursor-not-allowed`;
@@ -50,40 +50,40 @@ const getVariantStyles = (variant: ButtonVariant, disabled: boolean) => {
 
   switch (variant) {
     case 'primary':
-      return `${base} bg-gray-900 text-white hover:bg-gray-800 focus:bg-gray-700 focus:ring-gray-500 focus:ring-offset-gray-900`;
+      return `${base} bg-black/40 backdrop-blur-[2px] text-white hover:bg-black/50 focus:bg-black/60 focus:ring-white/50 focus:ring-offset-transparent border border-white/10`;
     
     case 'secondary':
-      return `${base} bg-white text-gray-900 hover:bg-gray-50 focus:bg-gray-100 focus:ring-gray-500 border border-gray-200`;
+      return `${base} bg-black/40 backdrop-blur-[2px] text-white hover:bg-black/50 focus:bg-black/60 focus:ring-white/50 focus:ring-offset-transparent border border-white/10`;
     
     case 'ghost':
-      return `${base} bg-transparent text-white hover:bg-white/10 focus:bg-white/20 focus:ring-white/50 focus:ring-offset-transparent`;
+      return `${base} bg-black/40 backdrop-blur-[2px] text-white hover:bg-black/50 focus:bg-black/60 focus:ring-white/50 focus:ring-offset-transparent border border-white/10`;
     
     case 'outline':
-      return `${base} bg-transparent border border-white/30 text-white hover:bg-white/10 hover:border-white/50 focus:bg-white/20 focus:ring-white/50 focus:ring-offset-transparent`;
+      return `${base} bg-black/40 backdrop-blur-[2px] text-white hover:bg-black/50 focus:bg-black/60 focus:ring-white/50 focus:ring-offset-transparent border border-white/10`;
     
     case 'glass':
-      return `${base} bg-black/20 backdrop-blur-[2px] text-white hover:bg-black/30 focus:bg-black/40 focus:ring-white/50 focus:ring-offset-transparent border border-white/10`;
+      return `${base} bg-black/40 backdrop-blur-[2px] text-white hover:bg-black/50 focus:bg-black/60 focus:ring-white/50 focus:ring-offset-transparent border border-white/10`;
     
     case 'minimal':
-      return `${base} bg-transparent text-white/80 hover:text-white hover:bg-white/5 focus:bg-white/10 focus:ring-white/30 focus:ring-offset-transparent`;
+      return `${base} bg-black/40 backdrop-blur-[2px] text-white hover:bg-black/50 focus:bg-black/60 focus:ring-white/50 focus:ring-offset-transparent border border-white/10`;
     
     default:
-      return `${base} bg-gray-900 text-white hover:bg-gray-800 focus:bg-gray-700 focus:ring-gray-500`;
+      return `${base} bg-black/40 backdrop-blur-[2px] text-white hover:bg-black/50 focus:bg-black/60 focus:ring-white/50 focus:ring-offset-transparent border border-white/10`;
   }
 };
 
 const getSizeStyles = (size: ButtonSize) => {
   switch (size) {
     case 'sm':
-      return 'px-4 py-2 text-sm rounded-md min-h-[36px]';
+      return 'px-3 py-2 text-xs min-h-[36px]';
     case 'md':
-      return 'px-6 py-3 text-sm rounded-md min-h-[44px]';
+      return 'px-4 py-3 lg:px-6 lg:py-4 text-xs lg:text-sm min-h-[44px]';
     case 'lg':
-      return 'px-8 py-4 text-base rounded-lg min-h-[48px]';
+      return 'px-6 py-4 lg:px-8 lg:py-5 text-sm lg:text-base min-h-[48px]';
     case 'xl':
-      return 'px-10 py-5 text-lg rounded-lg min-h-[56px]';
+      return 'px-8 py-5 lg:px-10 lg:py-6 text-base lg:text-lg min-h-[56px]';
     default:
-      return 'px-6 py-3 text-sm rounded-md min-h-[44px]';
+      return 'px-4 py-3 lg:px-6 lg:py-4 text-xs lg:text-sm min-h-[44px]';
   }
 };
 
