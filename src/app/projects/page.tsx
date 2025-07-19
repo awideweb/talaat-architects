@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { ProjectGrid } from '../../components';
 
 interface Project {
@@ -12,14 +12,34 @@ interface Project {
   year: number;
   location: string;
   images: Array<{
-    src: string;
-    thumbnail: string;
+    src: {
+      avif: string;
+      webp: string;
+      jpeg: string;
+    };
+    thumbnail: {
+      avif: string;
+      webp: string;
+      jpeg: string;
+    };
     alt: string;
+    width: number;
+    height: number;
   }>;
   thumbnail: {
-    src: string;
-    thumbnail: string;
+    src: {
+      avif: string;
+      webp: string;
+      jpeg: string;
+    };
+    thumbnail: {
+      avif: string;
+      webp: string;
+      jpeg: string;
+    };
     alt: string;
+    width: number;
+    height: number;
   } | null;
   slug: string;
 }
@@ -30,35 +50,42 @@ export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [loading, setLoading] = useState(true);
 
-  const loadProjects = async () => {
-    try {
-      const response = await fetch('/api/projects');
-      const data = await response.json();
-      setProjects(data);
-    } catch (error) {
-      console.error('Error loading projects:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const filterProjects = useCallback(() => {
-    if (selectedCategory === 'all') {
-      setFilteredProjects(projects);
-    } else {
-      setFilteredProjects(projects.filter(project => project.category === selectedCategory));
-    }
-  }, [projects, selectedCategory]);
-
   useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        const response = await fetch('/api/projects');
+        const data = await response.json();
+        setProjects(data);
+      } catch (error) {
+        console.error('Error loading projects:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     loadProjects();
   }, []);
 
   useEffect(() => {
-    filterProjects();
-  }, [projects, selectedCategory, filterProjects]);
+    // console.log('Filtering projects. Total:', projects.length, 'Category:', selectedCategory);
+    if (selectedCategory === 'all') {
+      setFilteredProjects(projects);
+    } else {
+      setFilteredProjects(
+        projects.filter(project => project.category === selectedCategory)
+      );
+    }
+    // const result = selectedCategory === 'all'
+    //   ? projects
+    //   : projects.filter(project => project.category === selectedCategory);
+    // setFilteredProjects(result);
+    // console.log('After filtering, found:', result.length, 'projects');
+  }, [projects, selectedCategory]);
 
-  const categories = ['all', ...Array.from(new Set(projects.map(p => p.category)))];
+  const categories = [
+    'all',
+    ...Array.from(new Set(projects.map(p => p.category))),
+  ];
 
   if (loading) {
     return (
@@ -126,6 +153,13 @@ export default function ProjectsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
+            {/* Debug: Show filtered projects count */}
+            <div className="bg-blue-500 text-white p-2 mb-4 rounded">
+              DEBUG: Passing {filteredProjects.length} filtered projects to ProjectGrid
+              {filteredProjects.length > 0 && (
+                <div>First project: {filteredProjects[0].title}</div>
+              )}
+            </div>
             <ProjectGrid projects={filteredProjects} />
           </motion.div>
 

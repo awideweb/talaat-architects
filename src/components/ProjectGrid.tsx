@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 
 interface Project {
@@ -12,14 +12,34 @@ interface Project {
   year: number;
   location: string;
   images: Array<{
-    src: string;
-    thumbnail: string;
+    src: {
+      avif: string;
+      webp: string;
+      jpeg: string;
+    };
+    thumbnail: {
+      avif: string;
+      webp: string;
+      jpeg: string;
+    };
     alt: string;
+    width: number;
+    height: number;
   }>;
   thumbnail: {
-    src: string;
-    thumbnail: string;
+    src: {
+      avif: string;
+      webp: string;
+      jpeg: string;
+    };
+    thumbnail: {
+      avif: string;
+      webp: string;
+      jpeg: string;
+    };
     alt: string;
+    width: number;
+    height: number;
   } | null;
   slug: string;
 }
@@ -29,6 +49,12 @@ interface ProjectGridProps {
 }
 
 export default function ProjectGrid({ projects }: ProjectGridProps) {
+  // Debug: Check if projects are being passed
+  console.log('ProjectGrid: Received', projects.length, 'projects');
+  if (projects.length > 0) {
+    console.log('First project:', projects[0].title, 'thumbnail:', projects[0].thumbnail?.thumbnail?.jpeg);
+  }
+  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -47,6 +73,16 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
       y: 0
     }
   };
+
+  if (projects.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <div className="bg-red-500 text-white p-4 rounded">
+          DEBUG: No projects found! Projects array is empty.
+        </div>
+      </div>
+    );
+  }
 
   return (
     <motion.section
@@ -78,14 +114,16 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
                 aria-labelledby={`project-${project.id}-title`}
               >
                 {project.thumbnail && project.thumbnail.thumbnail && (
-                  <Image
-                    src={project.thumbnail.thumbnail}
-                    alt={`${project.title} project thumbnail from ${project.year}${project.location ? ` in ${project.location}` : ''}`}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    loading="lazy"
-                  />
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={project.thumbnail.thumbnail.jpeg}
+                      alt={`${project.title} project thumbnail from ${project.year}${project.location ? ` in ${project.location}` : ''}`}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      onLoad={() => console.log('Image loaded:', project.thumbnail?.thumbnail?.jpeg)}
+                      onError={() => console.log('Image failed:', project.thumbnail?.thumbnail?.jpeg)}
+                    />
+                  </>
                 )}
                 
                 {/* Fallback for missing thumbnail */}

@@ -1,24 +1,34 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
 
+const remotePatterns = [
+  {
+    protocol: 'https',
+    hostname: '*.vercel.app',
+  },
+  {
+    protocol: 'http',
+    hostname: 'localhost',
+  },
+];
+
+// Add production hostname from environment variable if it exists
+if (process.env.PROD_IMAGE_HOSTNAME) {
+  remotePatterns.push({
+    protocol: 'https',
+    hostname: process.env.PROD_IMAGE_HOSTNAME,
+  });
+}
+
 const nextConfig = {
   // Image optimization configuration
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '*.vercel.app',
-      },
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-      },
-    ],
+    remotePatterns,
     unoptimized: false,
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
   },
   
   // Performance optimizations
@@ -35,7 +45,7 @@ const nextConfig = {
   
   // Performance experimental features
   experimental: {
-    optimizeCss: true,
+    optimizeCss: process.env.NODE_ENV === 'development', // Enable only in development to avoid production instability
     scrollRestoration: true,
   },
   
@@ -107,7 +117,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            value: 'public, max-age=86400', // 1 day cache, remove 'immutable'
           },
         ],
       },

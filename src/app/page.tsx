@@ -12,14 +12,34 @@ interface Project {
   year: number;
   location: string;
   images: Array<{
-    src: string;
-    thumbnail: string;
+    src: {
+      avif: string;
+      webp: string;
+      jpeg: string;
+    };
+    thumbnail: {
+      avif: string;
+      webp: string;
+      jpeg: string;
+    };
     alt: string;
+    width: number;
+    height: number;
   }>;
   thumbnail: {
-    src: string;
-    thumbnail: string;
+    src: {
+      avif: string;
+      webp: string;
+      jpeg: string;
+    };
+    thumbnail: {
+      avif: string;
+      webp: string;
+      jpeg: string;
+    };
     alt: string;
+    width: number;
+    height: number;
   } | null;
   slug: string;
 }
