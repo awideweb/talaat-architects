@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 
 interface Project {
@@ -69,6 +68,7 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
     }
   };
 
+
   if (projects.length === 0) {
     return (
       <div className="text-center py-12">
@@ -78,66 +78,68 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
   }
 
   return (
-    <motion.section
+    <motion.div
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-1 lg:grid-cols-2 gap-6"
-      aria-label="Project portfolio"
+      className="grid grid-cols-1 lg:grid-cols-2 gap-12"
     >
       {projects.map((project) => (
-        <motion.article
+        <motion.div
           key={project.id}
           variants={itemVariants}
           whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="group relative"
         >
-          <Link 
-            href={`/projects/${project.slug}`}
-            className="block focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
-          >
-            <div className="relative aspect-[4/3] w-full overflow-hidden">
-              {project.thumbnail && project.thumbnail.thumbnail ? (
-                <Image
-                  src={project.thumbnail.thumbnail.jpeg}
-                  alt={`${project.title} project thumbnail from ${project.year}${project.location ? ` in ${project.location}` : ''}`}
-                  width={800}
-                  height={600}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  priority={projects.indexOf(project) < 4}
-                />
-              ) : (
-                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                  <div className="text-center text-gray-500">
-                    <div className="w-12 h-12 mx-auto mb-2">
-                      <svg fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-                      </svg>
+          <Link href={`/projects/${project.slug}`}>
+            <div className="group cursor-pointer">
+              {/* Project Image */}
+              <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100 mb-6">
+                {project.thumbnail && project.thumbnail.thumbnail ? (
+                  <img
+                    src={project.thumbnail.thumbnail.jpeg}
+                    alt={`${project.title} project thumbnail from ${project.year}${project.location ? ` in ${project.location}` : ''}`}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                    <div className="text-center text-gray-500">
+                      <div className="w-12 h-12 mx-auto mb-2">
+                        <svg fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <p className="text-sm">No image available</p>
                     </div>
-                    <p className="text-sm">No image available</p>
                   </div>
+                )}
+                
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+                
+                {/* Info Box - Lower Right */}
+                <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-[2px] py-3 px-4 lg:py-4 lg:px-6 flex flex-col justify-center items-center text-center border border-white/10">
+                  <h4 className="text-white text-xs lg:text-sm font-light uppercase tracking-wide mb-1 lg:mb-2 leading-tight line-clamp-3">
+                    {project.title}
+                  </h4>
+                  <p className="text-white/70 text-xs lg:text-sm font-light">
+                    {project.year}
+                  </p>
+                </div>
+              </div>
+
+              {/* Project Info */}
+              {project.description && (
+                <div className="mt-4">
+                  <p className="text-gray-400 text-sm line-clamp-2 font-light">
+                    {project.description}
+                  </p>
                 </div>
               )}
-              
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-              
-              {/* Project Info - Bottom Right */}
-              <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm p-4 text-center text-white">
-                <h3 className="text-sm sm:text-base font-light uppercase tracking-wide mb-1 leading-tight">
-                  {project.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-white/80 font-light">
-                  {project.year}
-                </p>
-              </div>
             </div>
           </Link>
-        </motion.article>
+        </motion.div>
       ))}
-    </motion.section>
+    </motion.div>
   );
 }

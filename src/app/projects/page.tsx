@@ -52,15 +52,7 @@ export default function ProjectsPage() {
   useEffect(() => {
     const loadProjects = async () => {
       try {
-        const apiUrl = `${window.location.origin}/api/projects`;
-        const response = await fetch(apiUrl, {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          cache: 'no-cache',
-        });
+        const response = await fetch('/api/projects');
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

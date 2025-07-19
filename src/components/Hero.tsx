@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { heroImages, heroConfig } from '../config/hero-images';
 import { timelineContent, awards } from '../data/hero-content';
+import SlideOutNavigation from './SlideOutNavigation';
 
 export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -127,10 +128,21 @@ export default function Hero() {
             <div className="lg:hidden w-full">
               <div className="flex items-start justify-between w-full">
                 <div className="text-left">
-                  <h1 className="text-2xl font-light text-white tracking-wider">
+                  {/* Logo */}
+                  <div className="mb-4">
+                    <Image 
+                      src="/tarch_logo_wht.svg" 
+                      alt="Talaat Studio Logo" 
+                      width={40}
+                      height={51}
+                      className="w-10 h-auto"
+                    />
+                  </div>
+                  
+                  <h1 className="text-xl font-light text-white tracking-wider">
                     TALAAT
                   </h1>
-                  <h2 className="text-2xl font-light text-white tracking-wider mt-1">
+                  <h2 className="text-xl font-light text-white tracking-wider mt-1">
                     STUDIO
                   </h2>
                   <div className="w-16 h-px bg-white/60 mt-4"></div>
@@ -203,10 +215,21 @@ export default function Hero() {
 
             {/* Desktop Layout */}
             <div className="hidden lg:block text-center">
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-light text-white tracking-wider">
+              {/* Logo */}
+              <div className="mb-6">
+                <Image 
+                  src="/tarch_logo_wht.svg" 
+                  alt="Talaat Studio Logo" 
+                  width={48}
+                  height={61}
+                  className="w-12 h-auto mx-auto"
+                />
+              </div>
+              
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-light text-white tracking-wider">
                 TALAAT
               </h1>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light text-white tracking-wider mt-1">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-light text-white tracking-wider mt-1">
                 STUDIO
               </h2>
               <div className="w-16 h-px bg-white/60 mx-auto mt-4"></div>
@@ -286,7 +309,10 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="lg:col-span-2 p-4 lg:p-8 h-full flex"
         >
-          <div className="w-full max-w-2xl mx-auto">
+          <div className="w-full max-w-2xl mx-auto relative">
+            {/* Bottom gradient - positioned outside to stay fixed */}
+            <div className="absolute bottom-16 left-0 right-0 h-16 bg-gradient-to-t from-black/40 via-black/20 to-transparent pointer-events-none z-30"></div>
+            
             {/* Content Column */}
             <div
               ref={scrollContainerRef}
@@ -295,17 +321,14 @@ export default function Hero() {
                 scrollBehavior: 'smooth'
               }}
             >
-              {/* Gradient Fade - Top */}
-              <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-black/40 to-transparent pointer-events-none z-10"></div>
-              
-              {/* Gradient Fade - Bottom */}
-              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/40 to-transparent pointer-events-none z-10"></div>
+              {/* Top gradient - at the very edge */}
+              <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-black/40 via-black/20 to-transparent pointer-events-none z-30"></div>
 
               {/* Timeline Line */}
-              <div className="absolute left-1/2 top-12 bottom-12 w-px bg-white/30 transform -translate-x-1/2"></div>
+              <div className="absolute left-1/2 top-16 bottom-24 w-px bg-white/30 transform -translate-x-1/2"></div>
 
               {/* Scroll Progress Indicator */}
-              <div className="absolute right-4 top-12 bottom-12 w-px bg-white/20">
+              <div className="absolute right-4 top-16 bottom-24 w-px bg-white/20">
                 <motion.div
                   initial={{ scaleY: 0 }}
                   animate={{ scaleY: scrollProgress / 100 }}
@@ -316,7 +339,7 @@ export default function Hero() {
               </div>
 
               {/* Timeline Content */}
-              <div className="space-y-12 lg:space-y-16 pt-12 pb-12">
+              <div className="space-y-12 lg:space-y-16 pt-16 pb-24">
                 {timelineContent.map((item, index) => (
                   <motion.div
                     key={index}
@@ -416,44 +439,15 @@ export default function Hero() {
                 className="w-5 h-0.5 bg-white/80"
               />
             </motion.button>
-
-            {/* Slide-out Menu */}
-            <AnimatePresence>
-              {isScrollMenuOpen && (
-                <motion.div
-                  initial={{ opacity: 0, x: 300, scale: 0.9 }}
-                  animate={{ opacity: 1, x: 0, scale: 1 }}
-                  exit={{ opacity: 0, x: 300, scale: 0.9 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="absolute top-16 right-0 bg-black/40 backdrop-blur-[2px] rounded-lg border border-white/10 min-w-[200px]"
-                >
-                  <div className="py-4 px-6">
-                    {menuItems.map((item, index) => (
-                      <motion.div
-                        key={item.name}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.2, delay: index * 0.05 }}
-                      >
-                        {index > 0 && (
-                          <div className="w-full h-px bg-white/20 my-2"></div>
-                        )}
-                        <Link
-                          href={item.href}
-                          className="block py-3 px-4 text-white/80 hover:text-white hover:bg-white/10 rounded-md transition-all duration-200 font-light text-center"
-                          onClick={() => setIsScrollMenuOpen(false)}
-                        >
-                          {item.name}
-                        </Link>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Slide-out Navigation */}
+      <SlideOutNavigation 
+        isOpen={isScrollMenuOpen} 
+        onItemClick={() => setIsScrollMenuOpen(false)} 
+      />
 
       {/* Overlay for scroll menu */}
       <AnimatePresence>
